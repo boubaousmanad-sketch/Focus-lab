@@ -5,7 +5,8 @@ Site du coaching Focus & Performance : préparation physique sur mesure par Boub
 ## Contenu
 
 - `coach.html` : la page vitrine. Elle présente les profils, la méthode et l'app FOCUS LAB. Elle contient le questionnaire « Trouve ton programme » et les programmes VERSUS, BUILD, PERFORMANCE et Préparation d'objectif. Viennent ensuite le Running Club, le coach, les questions fréquentes et le formulaire de demande.
-- `images/` : les photos de séance, les couvertures des programmes, le logo, l'image de partage et l'icône du site.
+- `images/` : les photos de séance, les couvertures des programmes, le logo, l'image de partage et l'icône du site. Les fichiers suffixés par une largeur (`-640.avif`, `-480.webp`…) sont les versions allégées servies par la page.
+- `outils/optimiser-images.py` : recrée ces versions allégées (AVIF et WebP, plusieurs largeurs) à partir des images d'origine. Relance-le après avoir remplacé une photo : `python3 outils/optimiser-images.py`.
 - `fonts/` : la police Archivo, sous licence SIL Open Font License (voir `fonts/OFL-Archivo.txt`).
 
 ## Pas encore dans le dépôt

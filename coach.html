@@ -21,13 +21,15 @@
 <link rel="icon" href="images/favicon-fp.png">
 <link rel="apple-touch-icon" href="images/favicon-fp.png">
 <!-- Police Archivo hébergée avec le site (licence libre OFL, voir fonts/OFL-Archivo.txt) : rien n’est chargé depuis Google. -->
-<link rel="preload" href="fonts/archivo-latin.woff" as="font" type="font/woff" crossorigin>
+<!-- Photo d’ouverture annoncée tôt : c’est le plus gros élément visible au chargement. -->
+<link rel="preload" as="image" type="image/avif" imagesrcset="images/hero-squat-dos-640.avif 640w, images/hero-squat-dos-828.avif 828w, images/hero-squat-dos-1100.avif 1100w" imagesizes="(min-width: 960px) 50vw, 100vw" fetchpriority="high">
+<link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"Focus & Performance","slogan":"Focus on. Limits off.","description":"Préparation physique sur mesure à Namur et en ligne : programmes VERSUS (perte de poids), BUILD (prise de masse) et PERFORMANCE (conditionnement), préparation au combat, au football et aux tests, avec un suivi dans l’app FOCUS LAB.","url":"https://focus-on-performance.bouba-ousmanad.chatgpt.site/coach","logo":"https://focus-on-performance.bouba-ousmanad.chatgpt.site/images/logo-fp.png","image":"https://focus-on-performance.bouba-ousmanad.chatgpt.site/images/og-image.jpg","address":{"@type":"PostalAddress","addressLocality":"Namur","addressCountry":"BE"},"areaServed":[{"@type":"City","name":"Namur"},{"@type":"Country","name":"Belgique"}],"sameAs":["https://www.instagram.com/focus4performance/"],"founder":{"@type":"Person","name":"Bouba Ousmana","jobTitle":"Coach en préparation physique"},"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"VERSUS","description":"Programme de perte de poids"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"BUILD","description":"Programme de prise de masse"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"PERFORMANCE","description":"Programme de conditionnement"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Préparation d’objectif","description":"Préparation à un combat, une saison ou des tests physiques"}}]}
 </script>
 <style>
-@font-face{font-family:"Archivo";src:url("fonts/archivo-latin.woff") format("woff");font-weight:400 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+@font-face{font-family:"Archivo";src:url("fonts/archivo-latin.woff2") format("woff2");font-weight:400 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
 /* Focus & Performance — page vitrine
    Couleurs : noir du logo, craie, or du monogramme. Une seule famille : Archivo (largeur variable). */
 :root{
@@ -54,6 +56,8 @@ html{background:var(--noir);-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--noir);color:var(--craie);font-family:var(--font);font-size:1.0625rem;line-height:1.55;font-weight:400;font-stretch:100%;-webkit-font-smoothing:antialiased}
 img,svg{display:block;max-width:100%}
+picture{display:contents}
+picture>source{display:none}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--or);outline-offset:3px;border-radius:2px}
 .skip{position:absolute;left:var(--gutter);top:-100px;z-index:100;background:var(--or);color:#000;padding:10px 16px;border-radius:var(--r-sm);font-weight:700;text-decoration:none}
@@ -284,7 +288,7 @@ p{margin:0}
 .coach{display:grid;gap:40px}
 @media (min-width:900px){.coach{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center}}
 .coach-photo{position:relative;width:100%;max-width:460px;aspect-ratio:4/5;border-radius:var(--r-md);overflow:hidden;background:var(--fonte);border:1px solid var(--trait)}
-.coach-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.coach-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .coach-photo>svg{position:absolute;left:29%;top:31%;width:42%;height:auto}
 .coach-photo.has-photo>svg{display:none}
 .coach-copy{display:grid;gap:18px}
@@ -401,7 +405,7 @@ p{margin:0}
 /* Vidéo du coach (facultative) */
 .coach-photo>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
 .coach-photo.has-video>video{display:block}
-.coach-photo.has-video>img,.coach-photo.has-video>svg{display:none}
+.coach-photo.has-video img,.coach-photo.has-video>svg{display:none}
 
 
 /* Rythme des sections : craie pour la méthode, or pour le Running Club */
@@ -452,7 +456,7 @@ p{margin:0}
 .bi-1{object-position:50% 20%}
 .bi-2{object-position:50% 10%}
 @media (min-width:900px){.band{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}.band-copy{grid-column:auto;margin-bottom:0;padding-bottom:6px}}
-.coach-photo>img{object-position:50% 38%}
+.coach-photo img{object-position:50% 38%}
 .footer-logo{width:132px;height:auto}
 
 /* Pied de page */
@@ -485,7 +489,7 @@ p{margin:0}
     <a class="brand" href="#top">
       <span class="brand-mark">
         <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1.5"/><text x="20" y="25.4" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg>
-        <img src="images/logo-fp.png" alt="" width="59" height="38" decoding="async">
+        <img src="images/logo-fp-177.webp" alt="" width="59" height="38" decoding="async">
       </span>
       <span>Focus &amp; Performance</span>
     </a>
@@ -507,7 +511,7 @@ p{margin:0}
 <main id="contenu">
   <section class="hero" id="top">
     <figure class="hero-media">
-      <img src="images/hero-squat-dos.webp" alt="Séance de squat en sweat Focus &amp; Performance, imprimé « Focus on. Limits off. »" width="1100" height="1954" fetchpriority="high" decoding="async">
+      <picture><source type="image/avif" srcset="images/hero-squat-dos-640.avif 640w, images/hero-squat-dos-828.avif 828w, images/hero-squat-dos-1100.avif 1100w" sizes="(min-width: 960px) 50vw, 100vw"><img src="images/hero-squat-dos.webp" srcset="images/hero-squat-dos-640.webp 640w, images/hero-squat-dos-828.webp 828w, images/hero-squat-dos.webp 1100w" sizes="(min-width: 960px) 50vw, 100vw" alt="Séance de squat en sweat Focus &amp; Performance, imprimé « Focus on. Limits off. »" width="1100" height="1954" fetchpriority="high" decoding="async"></picture>
     </figure>
     <div class="wrap hero-inner">
       <h1 class="hero-title">
@@ -642,8 +646,8 @@ p{margin:0}
         <h2 id="seances-titre">En séance.</h2>
         <p>Renforcement ou cardio&nbsp;: chaque séance a sa place dans le programme.</p>
       </div>
-      <img class="band-img bi-1" src="images/seance-renforcement.webp" alt="Séance de renforcement des fessiers à la poulie" width="900" height="1599" loading="lazy" decoding="async">
-      <img class="band-img bi-2" src="images/seance-cardio.webp" alt="Séance de cardio sur simulateur d’escaliers" width="900" height="1599" loading="lazy" decoding="async">
+      <picture><source type="image/avif" srcset="images/seance-renforcement-450.avif 450w, images/seance-renforcement-900.avif 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw"><img class="band-img bi-1" src="images/seance-renforcement.webp" srcset="images/seance-renforcement-450.webp 450w, images/seance-renforcement.webp 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw" alt="Séance de renforcement des fessiers à la poulie" width="900" height="1599" loading="lazy" decoding="async"></picture>
+      <picture><source type="image/avif" srcset="images/seance-cardio-450.avif 450w, images/seance-cardio-900.avif 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw"><img class="band-img bi-2" src="images/seance-cardio.webp" srcset="images/seance-cardio-450.webp 450w, images/seance-cardio.webp 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw" alt="Séance de cardio sur simulateur d’escaliers" width="900" height="1599" loading="lazy" decoding="async"></picture>
     </div>
   </section>
 
@@ -813,7 +817,7 @@ p{margin:0}
       <!-- Pour afficher un prix, ajoute sous le nom d’un programme : <p class="plan-price">À partir de … € par mois</p> -->
       <div class="plans">
         <article class="plan" data-accent="versus">
-          <div class="plan-cover"><img src="images/cover-versus.webp" alt="" width="960" height="640" loading="lazy" decoding="async"></div>
+          <div class="plan-cover"><picture><source type="image/avif" srcset="images/cover-versus-480.avif 480w, images/cover-versus-960.avif 960w" sizes="(min-width: 1200px) 552px, (min-width: 700px) 46vw, 100vw"><img src="images/cover-versus.webp" srcset="images/cover-versus-480.webp 480w, images/cover-versus.webp 960w" sizes="(min-width: 1200px) 552px, (min-width: 700px) 46vw, 100vw" alt="" width="960" height="640" loading="lazy" decoding="async"></picture></div>
           <div class="plan-name">
             <h3>VERSUS</h3>
             <p class="plan-goal">Perte de poids</p>
@@ -831,7 +835,7 @@ p{margin:0}
           </div>
         </article>
         <article class="plan" data-accent="build">
-          <div class="plan-cover"><img src="images/cover-build.webp" alt="" width="960" height="640" loading="lazy" decoding="async"></div>
+          <div class="plan-cover"><picture><source type="image/avif" srcset="images/cover-build-480.avif 480w, images/cover-build-960.avif 960w" sizes="(min-width: 1200px) 552px, (min-width: 700px) 46vw, 100vw"><img src="images/cover-build.webp" srcset="images/cover-build-480.webp 480w, images/cover-build.webp 960w" sizes="(min-width: 1200px) 552px, (min-width: 700px) 46vw, 100vw" alt="" width="960" height="640" loading="lazy" decoding="async"></picture></div>
           <div class="plan-name">
             <h3>BUILD</h3>
             <p class="plan-goal">Prise de masse</p>
@@ -848,7 +852,7 @@ p{margin:0}
           </div>
         </article>
         <article class="plan" data-accent="performance">
-          <div class="plan-cover"><img src="images/cover-performance.webp" alt="" width="960" height="640" loading="lazy" decoding="async"></div>
+          <div class="plan-cover"><picture><source type="image/avif" srcset="images/cover-performance-480.avif 480w, images/cover-performance-960.avif 960w" sizes="(min-width: 1200px) 552px, (min-width: 700px) 46vw, 100vw"><img src="images/cover-performance.webp" srcset="images/cover-performance-480.webp 480w, images/cover-performance.webp 960w" sizes="(min-width: 1200px) 552px, (min-width: 700px) 46vw, 100vw" alt="" width="960" height="640" loading="lazy" decoding="async"></picture></div>
           <div class="plan-name">
             <h3>PERFORMANCE</h3>
             <p class="plan-goal">Conditionnement</p>
@@ -936,7 +940,7 @@ p{margin:0}
     <div class="wrap coach">
       <div class="coach-photo">
         <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1"/><text x="20" y="25.4" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg>
-        <img src="images/coach-squat.webp" alt="Bouba Ousmana à l’entraînement, au squat" width="1000" height="1777" loading="lazy" decoding="async">
+        <picture><source type="image/avif" srcset="images/coach-squat-500.avif 500w, images/coach-squat-1000.avif 1000w" sizes="(max-width: 520px) calc(100vw - 40px), 460px"><img src="images/coach-squat.webp" srcset="images/coach-squat-500.webp 500w, images/coach-squat.webp 1000w" sizes="(max-width: 520px) calc(100vw - 40px), 460px" alt="Bouba Ousmana à l’entraînement, au squat" width="1000" height="1777" loading="lazy" decoding="async"></picture>
         <!-- Facultatif : ajoute un court extrait de tes entraînements (sans son) sur le site, puis indique son chemin dans coachVideo, dans les réglages en bas de page. -->
         <video muted loop playsinline preload="none" aria-hidden="true" data-src="coach-video.mp4"></video>
       </div>
@@ -1062,7 +1066,7 @@ p{margin:0}
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <img class="footer-logo" src="images/logo-focus-on.webp" alt="Focus &amp; Performance : Focus on. Limits off. Mindset, progression, performance." width="640" height="607" loading="lazy" decoding="async">
+      <picture><source type="image/avif" srcset="images/logo-focus-on-264.avif 264w, images/logo-focus-on-396.avif 396w" sizes="132px"><img class="footer-logo" src="images/logo-focus-on-264.webp" srcset="images/logo-focus-on-264.webp 264w, images/logo-focus-on-396.webp 396w" sizes="132px" alt="Focus &amp; Performance : Focus on. Limits off. Mindset, progression, performance." width="640" height="607" loading="lazy" decoding="async"></picture>
     </div>
     <nav aria-label="Liens du site">
       <ul>
@@ -1107,7 +1111,7 @@ p{margin:0}
   document.querySelectorAll('.brand-mark > img').forEach(function (img) {
     watchImage(img, function () { img.parentNode.classList.add('has-img'); }, function () { img.remove(); });
   });
-  var photo = document.querySelector('.coach-photo > img');
+  var photo = document.querySelector('.coach-photo img');
   watchImage(photo, function () { photo.parentNode.classList.add('has-photo'); }, function () { photo.remove(); });
 
   /* Liens de contact */
