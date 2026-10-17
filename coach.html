@@ -127,7 +127,7 @@ p{margin:0}
   .hero-inner{padding-top:calc(clamp(56px,12vh,140px) + 80px)}
 }
 @media (min-width:960px){
-  .hero-media{left:auto;width:50%}
+  .hero-media{left:auto;width:auto;max-width:50%;aspect-ratio:1200/2132}
   .hero-media img{object-position:50% 34%}
   .hero-media::after{background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 30%,rgba(0,0,0,.08) 64%,rgba(0,0,0,.22) 100%),linear-gradient(0deg,#000 0%,rgba(0,0,0,0) 30%)}
   .hero-inner{min-height:min(860px,calc(100svh - 66px))}
@@ -295,7 +295,7 @@ p{margin:0}
 /* Le coach */
 .coach{display:grid;gap:40px}
 @media (min-width:900px){.coach{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center}}
-.coach-photo{position:relative;width:100%;max-width:460px;aspect-ratio:4/5;border-radius:var(--r-md);overflow:hidden;background:var(--fonte);border:1px solid var(--trait)}
+.coach-photo{position:relative;width:100%;max-width:400px;aspect-ratio:1000/1777;border-radius:var(--r-md);overflow:hidden;background:var(--fonte);border:1px solid var(--trait)}
 .coach-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .coach-photo>svg{position:absolute;left:29%;top:31%;width:42%;height:auto}
 .coach-photo.has-photo>svg{display:none}
@@ -470,21 +470,16 @@ p{margin:0}
 /* Galerie : défilement au doigt sur mobile, mosaïque décalée sur ordinateur */
 .seances .band-copy{margin-bottom:clamp(24px,4vw,40px)}
 .gallery-wrap{position:relative}
-.gallery{list-style:none;margin:0;padding:0 var(--gutter) 8px;display:grid;grid-auto-flow:column;grid-auto-columns:72vw;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:none;overscroll-behavior-x:contain}
+.gallery{list-style:none;margin:0;padding:0 var(--gutter) 8px;display:grid;grid-auto-flow:column;grid-auto-columns:max-content;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:none;overscroll-behavior-x:contain}
 .gallery::-webkit-scrollbar{display:none}
 .g-item{scroll-snap-align:start}
-.g-item figure{position:relative;margin:0;aspect-ratio:3/4;border-radius:var(--r-md);overflow:hidden;background:var(--fonte)}
-.g-item img{width:100%;height:100%;object-fit:cover}
+.g-item figure{position:relative;margin:0;border-radius:var(--r-md);overflow:hidden;background:var(--fonte)}
+.g-item img{width:auto;height:min(52svh,460px)}
 .g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.78));font-weight:700;font-stretch:87.5%;font-size:1rem}
-.g-kb img{object-position:50% 30%}
-.g-bench img{object-position:50% 45%}
-.g-tapis img{object-position:45% 30%}
-.g-dos img{object-position:50% 35%}
-.g-renfo img{object-position:50% 20%}
-.g-cardio img{object-position:50% 10%}
 @media (min-width:900px){
-  .gallery{max-width:var(--wrap);margin-inline:auto;grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;overflow:visible;padding-bottom:0}
-  .g-item:nth-child(3n+2){transform:translateY(48px)}
+  .gallery{max-width:var(--wrap);margin-inline:auto;display:block;columns:3;column-gap:16px;overflow:visible;padding-bottom:0}
+  .g-item{break-inside:avoid;margin-bottom:16px}
+  .g-item img{width:100%;height:auto}
   .seances{padding-bottom:48px}
 }
 @media (hover:hover) and (prefers-reduced-motion:no-preference){.g-item img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}.g-item:hover img{transform:scale(1.04)}}
@@ -492,8 +487,8 @@ p{margin:0}
 /* Quelle est ton excuse ? Les excuses se barrent une à une à l’arrivée de la section */
 .excuses-grid{display:grid;gap:40px}
 @media (min-width:900px){.excuses-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center}}
-.excuses-photo{position:relative;max-width:460px;aspect-ratio:4/5;border-radius:var(--r-md);overflow:hidden;background:var(--fonte)}
-.excuses-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.excuses-photo{position:relative;max-width:400px;border-radius:var(--r-md);overflow:hidden;background:var(--fonte)}
+.excuses-photo img{width:100%;height:auto}
 .excuses-copy{display:grid;gap:28px;justify-items:start}
 .excuses-copy h2{max-width:none;font-size:clamp(2.5rem,6.4vw,4.75rem);line-height:.92}
 .ex-1,.ex-3{display:block;font-stretch:75%}
@@ -513,10 +508,10 @@ p{margin:0}
 .excuses-punch span{display:block;color:var(--or)}
 
 /* Running Club : photo de piste */
-.club-photo{border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/5;background:#0b0b0b;max-width:460px}
-.club-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.club-photo{border-radius:var(--r-md);overflow:hidden;background:#0b0b0b;max-width:360px}
+.club-photo img{width:100%;height:auto}
 @media (min-width:900px){
-  .club{grid-template-columns:minmax(0,1fr) minmax(280px,400px);grid-template-rows:1fr auto;grid-template-areas:"copy photo" "btn photo";align-items:end;row-gap:32px}
+  .club{grid-template-columns:minmax(0,1fr) minmax(260px,360px);grid-template-rows:1fr auto;grid-template-areas:"copy photo" "btn photo";align-items:end;row-gap:32px}
   .club-copy{grid-area:copy}
   .club .btn{grid-area:btn;justify-self:start}
   .club-photo{grid-area:photo;align-self:center}
@@ -720,37 +715,37 @@ p{margin:0}
       <ul class="gallery" tabindex="0" aria-label="Photos de séances, fais défiler">
         <li class="g-item g-kb">
           <figure>
-            <picture><source type="image/avif" srcset="images/seance-kettlebells-500.avif 500w, images/seance-kettlebells-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-kettlebells.webp" srcset="images/seance-kettlebells-500.webp 500w, images/seance-kettlebells.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Séance de force en salle, une kettlebell de 24 kg dans chaque main" width="1000" height="1333" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/seance-kettlebells-500.avif 500w, images/seance-kettlebells-1000.avif 1000w" sizes="(min-width: 900px) 380px, 420px"><img src="images/seance-kettlebells.webp" srcset="images/seance-kettlebells-500.webp 500w, images/seance-kettlebells.webp 1000w" sizes="(min-width: 900px) 380px, 420px" alt="Séance de force en salle, une kettlebell de 24 kg dans chaque main" width="1000" height="1333" loading="lazy" decoding="async"></picture>
             <figcaption>Force</figcaption>
           </figure>
         </li>
         <li class="g-item g-bench">
           <figure>
-            <picture><source type="image/avif" srcset="images/seance-developpe-500.avif 500w, images/seance-developpe-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-developpe.webp" srcset="images/seance-developpe-500.webp 500w, images/seance-developpe.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Pause entre deux séries de développé couché" width="1000" height="1333" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/seance-developpe-500.avif 500w, images/seance-developpe-1000.avif 1000w" sizes="(min-width: 900px) 380px, 420px"><img src="images/seance-developpe.webp" srcset="images/seance-developpe-500.webp 500w, images/seance-developpe.webp 1000w" sizes="(min-width: 900px) 380px, 420px" alt="Pause entre deux séries de développé couché" width="1000" height="1333" loading="lazy" decoding="async"></picture>
             <figcaption>Développé couché</figcaption>
           </figure>
         </li>
         <li class="g-item g-tapis">
           <figure>
-            <picture><source type="image/avif" srcset="images/seance-tapis-500.avif 500w, images/seance-tapis-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-tapis.webp" srcset="images/seance-tapis-500.webp 500w, images/seance-tapis.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Échauffement sur tapis de course" width="1000" height="1333" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/seance-tapis-500.avif 500w, images/seance-tapis-1000.avif 1000w" sizes="(min-width: 900px) 380px, 420px"><img src="images/seance-tapis.webp" srcset="images/seance-tapis-500.webp 500w, images/seance-tapis.webp 1000w" sizes="(min-width: 900px) 380px, 420px" alt="Échauffement sur tapis de course" width="1000" height="1333" loading="lazy" decoding="async"></picture>
             <figcaption>Cardio</figcaption>
           </figure>
         </li>
         <li class="g-item g-dos">
           <figure>
-            <picture><source type="image/avif" srcset="images/seance-kettlebells-dos-500.avif 500w, images/seance-kettlebells-dos-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-kettlebells-dos.webp" srcset="images/seance-kettlebells-dos-500.webp 500w, images/seance-kettlebells-dos.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Marche du fermier avec deux kettlebells, vue de dos" width="1000" height="1777" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/seance-kettlebells-dos-500.avif 500w, images/seance-kettlebells-dos-1000.avif 1000w" sizes="(min-width: 900px) 380px, 420px"><img src="images/seance-kettlebells-dos.webp" srcset="images/seance-kettlebells-dos-500.webp 500w, images/seance-kettlebells-dos.webp 1000w" sizes="(min-width: 900px) 380px, 420px" alt="Marche du fermier avec deux kettlebells, vue de dos" width="1000" height="1777" loading="lazy" decoding="async"></picture>
             <figcaption>Gainage et port de charge</figcaption>
           </figure>
         </li>
         <li class="g-item g-renfo">
           <figure>
-            <picture><source type="image/avif" srcset="images/seance-renforcement-450.avif 450w, images/seance-renforcement-900.avif 900w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-renforcement.webp" srcset="images/seance-renforcement-450.webp 450w, images/seance-renforcement.webp 900w" sizes="(min-width: 900px) 360px, 72vw" alt="Séance de renforcement des fessiers à la poulie" width="900" height="1599" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/seance-renforcement-450.avif 450w, images/seance-renforcement-900.avif 900w" sizes="(min-width: 900px) 380px, 420px"><img src="images/seance-renforcement.webp" srcset="images/seance-renforcement-450.webp 450w, images/seance-renforcement.webp 900w" sizes="(min-width: 900px) 380px, 420px" alt="Séance de renforcement des fessiers à la poulie" width="900" height="1599" loading="lazy" decoding="async"></picture>
             <figcaption>Renforcement</figcaption>
           </figure>
         </li>
         <li class="g-item g-cardio">
           <figure>
-            <picture><source type="image/avif" srcset="images/seance-cardio-450.avif 450w, images/seance-cardio-900.avif 900w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-cardio.webp" srcset="images/seance-cardio-450.webp 450w, images/seance-cardio.webp 900w" sizes="(min-width: 900px) 360px, 72vw" alt="Séance de cardio sur simulateur d’escaliers" width="900" height="1599" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/seance-cardio-450.avif 450w, images/seance-cardio-900.avif 900w" sizes="(min-width: 900px) 380px, 420px"><img src="images/seance-cardio.webp" srcset="images/seance-cardio-450.webp 450w, images/seance-cardio.webp 900w" sizes="(min-width: 900px) 380px, 420px" alt="Séance de cardio sur simulateur d’escaliers" width="900" height="1599" loading="lazy" decoding="async"></picture>
             <figcaption>Conditionnement</figcaption>
           </figure>
         </li>
@@ -842,7 +837,7 @@ p{margin:0}
   <section class="section excuses" aria-labelledby="excuses-titre" data-excuses>
     <div class="wrap excuses-grid">
       <div class="excuses-photo">
-        <picture><source type="image/avif" srcset="images/excuses-piste-500.avif 500w, images/excuses-piste-1000.avif 1000w" sizes="(min-width: 900px) 460px, calc(100vw - 40px)"><img src="images/excuses-piste.webp" srcset="images/excuses-piste-500.webp 500w, images/excuses-piste.webp 1000w" sizes="(min-width: 900px) 460px, calc(100vw - 40px)" alt="Athlète souriant sur la piste d’athlétisme, casque sur les oreilles" width="1000" height="1777" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/avif" srcset="images/excuses-piste-500.avif 500w, images/excuses-piste-1000.avif 1000w" sizes="(max-width: 440px) calc(100vw - 40px), 400px"><img src="images/excuses-piste.webp" srcset="images/excuses-piste-500.webp 500w, images/excuses-piste.webp 1000w" sizes="(max-width: 440px) calc(100vw - 40px), 400px" alt="Athlète souriant sur la piste d’athlétisme, casque sur les oreilles" width="1000" height="1777" loading="lazy" decoding="async"></picture>
       </div>
       <div class="excuses-copy">
         <h2 id="excuses-titre"><span class="ex-1">Quelle est ton</span> <span class="ex-2">excuse</span> <span class="ex-3">du jour&#8239;?</span></h2>
@@ -1042,7 +1037,7 @@ p{margin:0}
         </div>
         <a class="btn btn-gold" href="#contact" data-club>Rejoindre le Running Club</a>
         <div class="club-photo">
-          <picture><source type="image/avif" srcset="images/running-piste-600.avif 600w, images/running-piste-1100.avif 1100w" sizes="(min-width: 900px) 400px, calc(100vw - 40px)"><img src="images/running-piste.webp" srcset="images/running-piste-600.webp 600w, images/running-piste.webp 1100w" sizes="(min-width: 900px) 400px, calc(100vw - 40px)" alt="Coureur de dos sur la piste d’athlétisme, dans le virage" width="1100" height="1954" loading="lazy" decoding="async"></picture>
+          <picture><source type="image/avif" srcset="images/running-piste-600.avif 600w, images/running-piste-1100.avif 1100w" sizes="(max-width: 400px) calc(100vw - 40px), 360px"><img src="images/running-piste.webp" srcset="images/running-piste-600.webp 600w, images/running-piste.webp 1100w" sizes="(max-width: 400px) calc(100vw - 40px), 360px" alt="Coureur de dos sur la piste d’athlétisme, dans le virage" width="1100" height="1954" loading="lazy" decoding="async"></picture>
         </div>
       </div>
     </div>
@@ -1073,7 +1068,7 @@ p{margin:0}
     <div class="wrap coach">
       <div class="coach-photo">
         <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1"/><text x="20" y="25.4" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg>
-        <picture><source type="image/avif" srcset="images/coach-squat-500.avif 500w, images/coach-squat-1000.avif 1000w" sizes="(max-width: 520px) calc(100vw - 40px), 460px"><img src="images/coach-squat.webp" srcset="images/coach-squat-500.webp 500w, images/coach-squat.webp 1000w" sizes="(max-width: 520px) calc(100vw - 40px), 460px" alt="Bouba Ousmana à l’entraînement, au squat" width="1000" height="1777" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/avif" srcset="images/coach-squat-500.avif 500w, images/coach-squat-1000.avif 1000w" sizes="(max-width: 440px) calc(100vw - 40px), 400px"><img src="images/coach-squat.webp" srcset="images/coach-squat-500.webp 500w, images/coach-squat.webp 1000w" sizes="(max-width: 440px) calc(100vw - 40px), 400px" alt="Bouba Ousmana à l’entraînement, au squat" width="1000" height="1777" loading="lazy" decoding="async"></picture>
         <!-- Facultatif : ajoute un court extrait de tes entraînements (sans son) sur le site, puis indique son chemin dans coachVideo, dans les réglages en bas de page. -->
         <video muted loop playsinline preload="none" aria-hidden="true" data-src="coach-video.mp4"></video>
       </div>
