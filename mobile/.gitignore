@@ -1,0 +1,24 @@
+# Dépendances (recréées par « npm install »)
+node_modules/
+
+# Systèmes et éditeurs
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Secrets et fichiers de signature : ne jamais les publier
+.env
+.env.*
+*.keystore
+*.jks
+*.p12
+*.p8
+*.pem
+*.key
+*.mobileprovision
+*.cer
+keystore.properties
+key.properties
+google-services.json
+GoogleService-Info.plist

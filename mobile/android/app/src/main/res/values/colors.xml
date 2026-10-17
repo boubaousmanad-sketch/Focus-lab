@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Couleur de fond de FOCUS LAB (theme-color du site) -->
+    <color name="focus_lab_fond">#090B0D</color>
+</resources>

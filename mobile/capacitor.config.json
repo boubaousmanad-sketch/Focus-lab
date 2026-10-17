@@ -1,0 +1,17 @@
+{
+  "appId": "be.focusperformance.focuslab",
+  "appName": "FOCUS LAB",
+  "webDir": "www",
+  "backgroundColor": "#090b0d",
+  "server": {
+    "allowNavigation": [
+      "focus-on-performance.bouba-ousmanad.chatgpt.site"
+    ],
+    "errorPath": "index.html"
+  },
+  "plugins": {
+    "SystemBars": {
+      "style": "DARK"
+    }
+  }
+}
