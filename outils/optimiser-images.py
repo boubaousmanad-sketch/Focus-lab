@@ -11,12 +11,19 @@ IMAGES = Path(__file__).resolve().parent.parent / "images"
 
 # source -> largeurs à produire (en pixels)
 VARIANTES = {
+    "hero-kettlebells.webp": [640, 828, 1200],
     "hero-squat-dos.webp": [640, 828, 1100],
     "seance-renforcement.webp": [450, 900],
     "seance-cardio.webp": [450, 900],
     "cover-versus.webp": [480, 960],
     "cover-build.webp": [480, 960],
     "cover-performance.webp": [480, 960],
+    "seance-kettlebells.webp": [500, 1000],
+    "seance-kettlebells-dos.webp": [500, 1000],
+    "seance-tapis.webp": [500, 1000],
+    "seance-developpe.webp": [500, 1000],
+    "excuses-piste.webp": [500, 1000],
+    "running-piste.webp": [600, 1100],
     "coach-squat.webp": [500, 1000],
     "logo-fp.png": [177],
     "logo-focus-on.webp": [264, 396],

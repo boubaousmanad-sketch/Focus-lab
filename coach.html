@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="images/favicon-fp.png">
 <!-- Police Archivo hébergée avec le site (licence libre OFL, voir fonts/OFL-Archivo.txt) : rien n’est chargé depuis Google. -->
 <!-- Photo d’ouverture annoncée tôt : c’est le plus gros élément visible au chargement. -->
-<link rel="preload" as="image" type="image/avif" imagesrcset="images/hero-squat-dos-640.avif 640w, images/hero-squat-dos-828.avif 828w, images/hero-squat-dos-1100.avif 1100w" imagesizes="(min-width: 960px) 50vw, 100vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" imagesrcset="images/hero-kettlebells-640.avif 640w, images/hero-kettlebells-828.avif 828w, images/hero-kettlebells-1200.avif 1200w" imagesizes="(min-width: 960px) 50vw, 100vw" fetchpriority="high">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">
@@ -114,13 +114,21 @@ p{margin:0}
 /* Ouverture : « Focus on. » reste serré, « Limits off. » s’étire jusqu’au bord, sur la photo de séance */
 .hero{position:relative;isolation:isolate;overflow:hidden}
 .hero-media{position:absolute;inset:0;z-index:-1;margin:0}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 28%}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.34) 34%,rgba(0,0,0,.82) 58%,#000 84%)}
+
 @media (prefers-reduced-motion:no-preference){.js .hero-media img{transform:scale(1.08);transition:transform 2.2s cubic-bezier(.2,.65,.2,1)}.js.is-ready .hero-media img{transform:none}}
 .hero-inner{display:grid;align-content:end;min-height:calc(100svh - 66px);padding-block:clamp(56px,12vh,140px) clamp(48px,7vw,96px)}
+/* Mobile : la photo remonte pour que le visage apparaisse entre l’en-tête et le titre, éclaircie pour rester lisible. */
+@media (max-width:959px){
+  .hero-media{top:-20svh;bottom:auto;height:110svh}
+  .hero-media img{filter:brightness(1.4) contrast(1.05)}
+  .hero-media::after{background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.55) 52%,rgba(0,0,0,.9) 70%,#000 92%)}
+  .hero-inner{padding-top:calc(clamp(56px,12vh,140px) + 80px)}
+}
 @media (min-width:960px){
   .hero-media{left:auto;width:50%}
-  .hero-media img{object-position:50% 22%}
+  .hero-media img{object-position:50% 34%}
   .hero-media::after{background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 30%,rgba(0,0,0,.08) 64%,rgba(0,0,0,.22) 100%),linear-gradient(0deg,#000 0%,rgba(0,0,0,0) 30%)}
   .hero-inner{min-height:min(860px,calc(100svh - 66px))}
 }
@@ -449,15 +457,70 @@ p{margin:0}
 
 /* Séances en photo */
 .seances{padding-top:clamp(64px,9vw,120px)}
-.band{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.band-copy{grid-column:1/-1;display:grid;gap:14px;margin-bottom:12px}
-.band-copy p{color:var(--craie-2);max-width:32ch;font-size:clamp(1.0625rem,1.4vw,1.25rem)}
-.band-img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:var(--r-md);background:var(--fonte)}
-.bi-1{object-position:50% 20%}
-.bi-2{object-position:50% 10%}
-@media (min-width:900px){.band{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}.band-copy{grid-column:auto;margin-bottom:0;padding-bottom:6px}}
+.band-copy{display:grid;gap:14px}
+.band-copy p{color:var(--craie-2);max-width:40ch;font-size:clamp(1.0625rem,1.4vw,1.25rem)}
 .coach-photo img{object-position:50% 38%}
 .footer-logo{width:132px;height:auto}
+
+/* Points forts sous l’ouverture */
+.proof{list-style:none;margin:clamp(40px,6vw,72px) 0 0;padding:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;border-top:1px solid rgba(237,234,227,.18);color:var(--craie-2);font-size:.9375rem;line-height:1.35}
+.proof strong{display:block;color:var(--craie);font-size:1.125rem;font-weight:800;font-stretch:87.5%}
+@media (min-width:900px){.proof{grid-template-columns:repeat(4,minmax(0,1fr))}.proof li+li{padding-left:24px;border-left:1px solid var(--trait)}}
+
+/* Galerie : défilement au doigt sur mobile, mosaïque décalée sur ordinateur */
+.seances .band-copy{margin-bottom:clamp(24px,4vw,40px)}
+.gallery-wrap{position:relative}
+.gallery{list-style:none;margin:0;padding:0 var(--gutter) 8px;display:grid;grid-auto-flow:column;grid-auto-columns:72vw;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:none;overscroll-behavior-x:contain}
+.gallery::-webkit-scrollbar{display:none}
+.g-item{scroll-snap-align:start}
+.g-item figure{position:relative;margin:0;aspect-ratio:3/4;border-radius:var(--r-md);overflow:hidden;background:var(--fonte)}
+.g-item img{width:100%;height:100%;object-fit:cover}
+.g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.78));font-weight:700;font-stretch:87.5%;font-size:1rem}
+.g-kb img{object-position:50% 30%}
+.g-bench img{object-position:50% 45%}
+.g-tapis img{object-position:45% 30%}
+.g-dos img{object-position:50% 35%}
+.g-renfo img{object-position:50% 20%}
+.g-cardio img{object-position:50% 10%}
+@media (min-width:900px){
+  .gallery{max-width:var(--wrap);margin-inline:auto;grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;overflow:visible;padding-bottom:0}
+  .g-item:nth-child(3n+2){transform:translateY(48px)}
+  .seances{padding-bottom:48px}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.g-item img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}.g-item:hover img{transform:scale(1.04)}}
+
+/* Quelle est ton excuse ? Les excuses se barrent une à une à l’arrivée de la section */
+.excuses-grid{display:grid;gap:40px}
+@media (min-width:900px){.excuses-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center}}
+.excuses-photo{position:relative;max-width:460px;aspect-ratio:4/5;border-radius:var(--r-md);overflow:hidden;background:var(--fonte)}
+.excuses-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.excuses-copy{display:grid;gap:28px;justify-items:start}
+.excuses-copy h2{max-width:none;font-size:clamp(2.5rem,6.4vw,4.75rem);line-height:.92}
+.ex-1,.ex-3{display:block;font-stretch:75%}
+.ex-2{display:block;font-stretch:125%;color:var(--or);font-size:1.18em}
+.excuse-list{list-style:none;margin:0;padding:0;display:grid;gap:2px;width:100%}
+@media (min-width:640px){.excuse-list{grid-template-columns:1fr 1fr;column-gap:32px}}
+.excuse-list li{position:relative;padding:12px 0 12px 36px;border-bottom:1px solid var(--trait);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:.9375rem}
+.excuse-list li::before{content:"";position:absolute;left:0;top:50%;margin-top:-11px;width:22px;height:22px;border:2px solid var(--or);border-radius:50%;background:linear-gradient(45deg,transparent 45%,var(--or) 45% 55%,transparent 55%),linear-gradient(-45deg,transparent 45%,var(--or) 45% 55%,transparent 55%) center/62% 62% no-repeat}
+.excuse-list span{color:var(--craie-2);background:linear-gradient(var(--or),var(--or)) 0 56%/100% 2px no-repeat;}
+@media (prefers-reduced-motion:no-preference){
+  .js .excuse-list span{background-size:0% 2px;transition:background-size .45s cubic-bezier(.3,.7,.2,1);transition-delay:calc(var(--i,0) * 140ms + 200ms)}
+  .js .excuses.is-in .excuse-list span{background-size:100% 2px}
+  .js .excuses-punch{opacity:0;transform:translateY(12px);transition:opacity .6s ease 1.5s,transform .6s cubic-bezier(.2,.7,.2,1) 1.5s}
+  .js .excuses.is-in .excuses-punch{opacity:1;transform:none}
+}
+.excuses-punch{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:850;font-stretch:75%;line-height:1.05;text-transform:uppercase}
+.excuses-punch span{display:block;color:var(--or)}
+
+/* Running Club : photo de piste */
+.club-photo{border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/5;background:#0b0b0b;max-width:460px}
+.club-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+@media (min-width:900px){
+  .club{grid-template-columns:minmax(0,1fr) minmax(280px,400px);grid-template-rows:1fr auto;grid-template-areas:"copy photo" "btn photo";align-items:end;row-gap:32px}
+  .club-copy{grid-area:copy}
+  .club .btn{grid-area:btn;justify-self:start}
+  .club-photo{grid-area:photo;align-self:center}
+}
 
 /* Pied de page */
 .site-footer{border-top:1px solid var(--trait);padding:56px 0 48px}
@@ -511,7 +574,7 @@ p{margin:0}
 <main id="contenu">
   <section class="hero" id="top">
     <figure class="hero-media">
-      <picture><source type="image/avif" srcset="images/hero-squat-dos-640.avif 640w, images/hero-squat-dos-828.avif 828w, images/hero-squat-dos-1100.avif 1100w" sizes="(min-width: 960px) 50vw, 100vw"><img src="images/hero-squat-dos.webp" srcset="images/hero-squat-dos-640.webp 640w, images/hero-squat-dos-828.webp 828w, images/hero-squat-dos.webp 1100w" sizes="(min-width: 960px) 50vw, 100vw" alt="Séance de squat en sweat Focus &amp; Performance, imprimé « Focus on. Limits off. »" width="1100" height="1954" fetchpriority="high" decoding="async"></picture>
+      <picture><source type="image/avif" srcset="images/hero-kettlebells-640.avif 640w, images/hero-kettlebells-828.avif 828w, images/hero-kettlebells-1200.avif 1200w" sizes="(min-width: 960px) 50vw, 100vw"><img src="images/hero-kettlebells.webp" srcset="images/hero-kettlebells-640.webp 640w, images/hero-kettlebells-828.webp 828w, images/hero-kettlebells.webp 1200w" sizes="(min-width: 960px) 50vw, 100vw" alt="Athlète Focus &amp; Performance en salle, une kettlebell dans chaque main" width="1200" height="2132" fetchpriority="high" decoding="async"></picture>
     </figure>
     <div class="wrap hero-inner">
       <h1 class="hero-title">
@@ -530,6 +593,12 @@ p{margin:0}
           </div>
         </div>
       </div>
+      <ul class="proof" aria-label="En bref">
+        <li><strong>Namur</strong> en présentiel, en ligne ou en hybride</li>
+        <li><strong>4 ans</strong> d’expérience, du débutant à l’athlète pro</li>
+        <li><strong>FOCUS LAB</strong> pour suivre chaque séance</li>
+        <li><strong>Tarif annoncé</strong> avant tout engagement</li>
+      </ul>
     </div>
   </section>
 
@@ -641,13 +710,51 @@ p{margin:0}
   </section>
 
   <section class="seances" aria-labelledby="seances-titre">
-    <div class="wrap band">
+    <div class="wrap">
       <div class="band-copy">
         <h2 id="seances-titre">En séance.</h2>
-        <p>Renforcement ou cardio&nbsp;: chaque séance a sa place dans le programme.</p>
+        <p>Force, cardio, renforcement&nbsp;: chaque séance a sa place dans le programme.</p>
       </div>
-      <picture><source type="image/avif" srcset="images/seance-renforcement-450.avif 450w, images/seance-renforcement-900.avif 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw"><img class="band-img bi-1" src="images/seance-renforcement.webp" srcset="images/seance-renforcement-450.webp 450w, images/seance-renforcement.webp 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw" alt="Séance de renforcement des fessiers à la poulie" width="900" height="1599" loading="lazy" decoding="async"></picture>
-      <picture><source type="image/avif" srcset="images/seance-cardio-450.avif 450w, images/seance-cardio-900.avif 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw"><img class="band-img bi-2" src="images/seance-cardio.webp" srcset="images/seance-cardio-450.webp 450w, images/seance-cardio.webp 900w" sizes="(min-width: 1200px) 370px, (min-width: 900px) 31vw, 50vw" alt="Séance de cardio sur simulateur d’escaliers" width="900" height="1599" loading="lazy" decoding="async"></picture>
+    </div>
+    <div class="gallery-wrap">
+      <ul class="gallery" tabindex="0" aria-label="Photos de séances, fais défiler">
+        <li class="g-item g-kb">
+          <figure>
+            <picture><source type="image/avif" srcset="images/seance-kettlebells-500.avif 500w, images/seance-kettlebells-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-kettlebells.webp" srcset="images/seance-kettlebells-500.webp 500w, images/seance-kettlebells.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Séance de force en salle, une kettlebell de 24 kg dans chaque main" width="1000" height="1333" loading="lazy" decoding="async"></picture>
+            <figcaption>Force</figcaption>
+          </figure>
+        </li>
+        <li class="g-item g-bench">
+          <figure>
+            <picture><source type="image/avif" srcset="images/seance-developpe-500.avif 500w, images/seance-developpe-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-developpe.webp" srcset="images/seance-developpe-500.webp 500w, images/seance-developpe.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Pause entre deux séries de développé couché" width="1000" height="1333" loading="lazy" decoding="async"></picture>
+            <figcaption>Développé couché</figcaption>
+          </figure>
+        </li>
+        <li class="g-item g-tapis">
+          <figure>
+            <picture><source type="image/avif" srcset="images/seance-tapis-500.avif 500w, images/seance-tapis-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-tapis.webp" srcset="images/seance-tapis-500.webp 500w, images/seance-tapis.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Échauffement sur tapis de course" width="1000" height="1333" loading="lazy" decoding="async"></picture>
+            <figcaption>Cardio</figcaption>
+          </figure>
+        </li>
+        <li class="g-item g-dos">
+          <figure>
+            <picture><source type="image/avif" srcset="images/seance-kettlebells-dos-500.avif 500w, images/seance-kettlebells-dos-1000.avif 1000w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-kettlebells-dos.webp" srcset="images/seance-kettlebells-dos-500.webp 500w, images/seance-kettlebells-dos.webp 1000w" sizes="(min-width: 900px) 360px, 72vw" alt="Marche du fermier avec deux kettlebells, vue de dos" width="1000" height="1777" loading="lazy" decoding="async"></picture>
+            <figcaption>Gainage et port de charge</figcaption>
+          </figure>
+        </li>
+        <li class="g-item g-renfo">
+          <figure>
+            <picture><source type="image/avif" srcset="images/seance-renforcement-450.avif 450w, images/seance-renforcement-900.avif 900w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-renforcement.webp" srcset="images/seance-renforcement-450.webp 450w, images/seance-renforcement.webp 900w" sizes="(min-width: 900px) 360px, 72vw" alt="Séance de renforcement des fessiers à la poulie" width="900" height="1599" loading="lazy" decoding="async"></picture>
+            <figcaption>Renforcement</figcaption>
+          </figure>
+        </li>
+        <li class="g-item g-cardio">
+          <figure>
+            <picture><source type="image/avif" srcset="images/seance-cardio-450.avif 450w, images/seance-cardio-900.avif 900w" sizes="(min-width: 900px) 360px, 72vw"><img src="images/seance-cardio.webp" srcset="images/seance-cardio-450.webp 450w, images/seance-cardio.webp 900w" sizes="(min-width: 900px) 360px, 72vw" alt="Séance de cardio sur simulateur d’escaliers" width="900" height="1599" loading="lazy" decoding="async"></picture>
+            <figcaption>Conditionnement</figcaption>
+          </figure>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -728,6 +835,29 @@ p{margin:0}
         </dl>
         <p class="privacy-note"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Ton espace est privé&nbsp;: seuls toi et ton coach y avez accès. Les données de suivi sont hébergées en France.</p>
         <a class="text-link" href="index.html">Déjà client&#8239;? Ouvrir FOCUS LAB</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section excuses" aria-labelledby="excuses-titre" data-excuses>
+    <div class="wrap excuses-grid">
+      <div class="excuses-photo">
+        <picture><source type="image/avif" srcset="images/excuses-piste-500.avif 500w, images/excuses-piste-1000.avif 1000w" sizes="(min-width: 900px) 460px, calc(100vw - 40px)"><img src="images/excuses-piste.webp" srcset="images/excuses-piste-500.webp 500w, images/excuses-piste.webp 1000w" sizes="(min-width: 900px) 460px, calc(100vw - 40px)" alt="Athlète souriant sur la piste d’athlétisme, casque sur les oreilles" width="1000" height="1777" loading="lazy" decoding="async"></picture>
+      </div>
+      <div class="excuses-copy">
+        <h2 id="excuses-titre"><span class="ex-1">Quelle est ton</span> <span class="ex-2">excuse</span> <span class="ex-3">du jour&#8239;?</span></h2>
+        <ul class="excuse-list">
+          <li><span>Trop fatigué</span></li>
+          <li><span>Pas le temps</span></li>
+          <li><span>Il fait trop froid, ou trop chaud</span></li>
+          <li><span>J’ai mal partout</span></li>
+          <li><span>Pas d’humeur</span></li>
+          <li><span>Demain sera mieux</span></li>
+          <li><span>J’ai déjà bien fait cette semaine</span></li>
+          <li><span>C’est pas le bon moment</span></li>
+        </ul>
+        <p class="excuses-punch">Arrête les excuses. <span>Commence par toi.</span></p>
+        <a class="btn btn-gold" href="#trouve">Trouver mon programme</a>
       </div>
     </div>
   </section>
@@ -911,6 +1041,9 @@ p{margin:0}
           <p class="lead">Le Running Club Focus &amp; Performance réunit celles et ceux qui courent avec nous&nbsp;: des sorties en groupe, quel que soit ton niveau.</p>
         </div>
         <a class="btn btn-gold" href="#contact" data-club>Rejoindre le Running Club</a>
+        <div class="club-photo">
+          <picture><source type="image/avif" srcset="images/running-piste-600.avif 600w, images/running-piste-1100.avif 1100w" sizes="(min-width: 900px) 400px, calc(100vw - 40px)"><img src="images/running-piste.webp" srcset="images/running-piste-600.webp 600w, images/running-piste.webp 1100w" sizes="(min-width: 900px) 400px, calc(100vw - 40px)" alt="Coureur de dos sur la piste d’athlétisme, dans le virage" width="1100" height="1954" loading="lazy" decoding="async"></picture>
+        </div>
       </div>
     </div>
   </section>
@@ -1148,6 +1281,18 @@ p{margin:0}
     }, { threshold: 0.35 });
     mo.observe(manifesto);
   } else if (manifesto) manifesto.classList.add('is-in');
+
+  /* Quelle est ton excuse ? */
+  var excuses = document.querySelector('[data-excuses]');
+  if (excuses) {
+    excuses.querySelectorAll('.excuse-list span').forEach(function (el, i) { el.style.setProperty('--i', i); });
+    if ('IntersectionObserver' in window) {
+      var eo = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { excuses.classList.add('is-in'); eo.disconnect(); }
+      }, { threshold: 0.3 });
+      eo.observe(excuses.querySelector('.excuse-list'));
+    } else excuses.classList.add('is-in');
+  }
 
   /* Menu mobile */
   var menuBtn = document.querySelector('.menu-btn');
