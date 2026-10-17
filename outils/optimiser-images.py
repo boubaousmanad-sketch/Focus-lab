@@ -22,6 +22,7 @@ VARIANTES = {
     "seance-kettlebells-dos.webp": [500, 1000],
     "seance-tapis.webp": [500, 1000],
     "seance-developpe.webp": [500, 1000],
+    "seance-poulie.webp": [500, 1000],
     "excuses-piste.webp": [500, 1000],
     "running-piste.webp": [600, 1100],
     "coach-squat.webp": [500, 1000],
