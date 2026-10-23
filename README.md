@@ -11,7 +11,7 @@ Site du coaching Focus & Performance : préparation physique sur mesure par Boub
 
 ## Pas encore dans le dépôt
 
-L'app FOCUS LAB (`index.html`), `journal.html`, `confidentialite.html` et `focus-performance-brand.png` sont publiés sur ChatGPT Sites. `coach.html` contient des liens vers ces pages : ajoute-les ici pour réunir tout le site au même endroit.
+L'app FOCUS LAB (`index.html`), `journal.html`, `confidentialite.html` et `focus-performance-brand.png` sont publiés sur ChatGPT Sites, et `coach.html` y renvoie par leur adresse complète. Pour réunir tout le site ici, ajoute ces fichiers et remets des liens relatifs (`index.html`…).
 
 ## Réglages
 
@@ -24,3 +24,5 @@ La liste `ALIMENTS`, dans le script en bas de `coach.html`, contient les aliment
 ## Mise en ligne
 
 Publie `coach.html` avec les dossiers `images/` et `fonts/` à la racine du site.
+
+Avec GitHub Pages (Settings, Pages, « Deploy from a branch », branche `main`, dossier racine), la vitrine est publiée à https://boubaousmanad-sketch.github.io/Focus-lab/coach.html et se met à jour à chaque modification de la branche `main`. `404.html` renvoie les adresses inconnues, et la racine du site, vers la vitrine. L’app FOCUS LAB, le fil du coach et la confidentialité restent sur ChatGPT Sites : les liens de `coach.html` pointent vers ces pages.
