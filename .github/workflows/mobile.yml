@@ -1,0 +1,120 @@
+# Compile l'app mobile FOCUS LAB (dossier mobile/) pour Android et iOS.
+# Se lance quand mobile/ change, sur les pull requests et sur main.
+# Android : produit un APK de test à télécharger dans l'onglet Actions (artefact).
+# iOS : compile pour le simulateur, sans signature (la signature se fait sur un Mac).
+
+name: FOCUS LAB Mobile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile.yml'
+  pull_request:
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+    working-directory: mobile
+
+jobs:
+  android:
+    name: Android (APK de test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Vérifier le Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund 2>&1 | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Synchroniser le projet Android
+        run: npx cap sync android 2>&1 | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Compiler l'APK
+        working-directory: mobile/android
+        run: ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Publier l'APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: focus-lab-android-debug
+          path: mobile/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Résumer l'erreur
+        if: failure()
+        run: |
+          f="$RUNNER_TEMP/journal.txt"
+          [ -f "$f" ] || exit 0
+          msg=$(grep -E -i -A3 'error|what went wrong|failed|exception' "$f" | tail -n 60 || true)
+          [ -n "$msg" ] || msg=$(tail -n 60 "$f")
+          msg=$(printf '%s\n' "$msg" | awk 'BEGIN{ORS="%0A"} {gsub(/%/,"%25"); gsub(/\r/,"%0D"); print}')
+          echo "::error title=Android - extrait du journal::${msg}"
+
+  ios:
+    name: iOS (simulateur, sans signature)
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Version de Xcode
+        run: xcodebuild -version | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund 2>&1 | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Synchroniser le projet iOS
+        run: npx cap sync ios 2>&1 | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Compiler l'app (simulateur)
+        run: |
+          xcodebuild \
+            -project ios/App/App.xcodeproj \
+            -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee -a "$RUNNER_TEMP/journal.txt"
+
+      - name: Résumer l'erreur
+        if: failure()
+        run: |
+          f="$RUNNER_TEMP/journal.txt"
+          [ -f "$f" ] || exit 0
+          msg=$(grep -E -i -A2 'error:|\*\* BUILD FAILED|failed|fatal' "$f" | tail -n 60 || true)
+          [ -n "$msg" ] || msg=$(tail -n 60 "$f")
+          msg=$(printf '%s\n' "$msg" | awk 'BEGIN{ORS="%0A"} {gsub(/%/,"%25"); gsub(/\r/,"%0D"); print}')
+          echo "::error title=iOS - extrait du journal::${msg}"

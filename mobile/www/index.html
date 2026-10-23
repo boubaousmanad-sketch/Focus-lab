@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr" data-etat="chargement">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>FOCUS LAB</title>
+<!--
+  Page de démarrage de l'app mobile FOCUS LAB.
+  Elle est livrée dans l'app : elle s'affiche au lancement, vérifie que FOCUS LAB
+  est joignable puis l'ouvre. Sans connexion, elle affiche un message et réessaie
+  toute seule. Capacitor la réaffiche aussi si une page ne peut pas se charger
+  (réglage server.errorPath dans capacitor.config.json).
+-->
+<style>
+:root{
+  --fond:#090b0d;
+  --craie:#edeae3;
+  --acier:#9c978e;
+  --or:#c9a24d;
+  --or-vif:#dcb75f;
+  --font:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--fond);color:var(--craie);font-family:var(--font);-webkit-font-smoothing:antialiased}
+body{
+  display:flex;align-items:center;justify-content:center;
+  padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
+}
+main{width:100%;max-width:340px;text-align:center}
+.logo{width:150px;height:auto;margin:0 auto 22px;display:block}
+h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:.24em;text-indent:.24em}
+.signature{margin:8px 0 0;color:var(--acier);font-size:.8125rem;letter-spacing:.08em}
+.etat{margin-top:34px;min-height:210px}
+.chargement{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--acier);font-size:.9375rem}
+.roue{width:20px;height:20px;border-radius:50%;border:2px solid rgba(201,162,77,.25);border-top-color:var(--or);animation:tour .9s linear infinite}
+@keyframes tour{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.roue{animation-duration:2.4s}}
+.hors-ligne{display:none}
+.message{margin:0;font-size:1.0625rem;font-weight:700}
+.aide{margin:8px 0 22px;color:var(--acier);font-size:.9375rem;line-height:1.5}
+.bouton{
+  appearance:none;border:0;border-radius:999px;padding:14px 28px;min-width:180px;
+  background:var(--or);color:#000;font:inherit;font-weight:700;font-size:1rem;letter-spacing:.02em;cursor:pointer
+}
+.bouton:active{background:var(--or-vif)}
+.bouton:focus-visible{outline:2px solid var(--or-vif);outline-offset:3px}
+[data-etat="hors-ligne"] .chargement{display:none}
+[data-etat="hors-ligne"] .hors-ligne{display:block}
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="logo-fp.png" alt="" width="360" height="237">
+  <h1>FOCUS LAB</h1>
+  <p class="signature">by Focus &amp; Performance</p>
+
+  <div class="etat">
+    <div class="chargement" role="status" aria-live="polite">
+      <span class="roue" aria-hidden="true"></span>
+      <span>Ouverture de FOCUS LAB…</span>
+    </div>
+    <div class="hors-ligne" role="alert">
+      <p class="message">Pas de connexion à FOCUS LAB</p>
+      <p class="aide">Vérifie ton Wi-Fi ou tes données mobiles. L’app réessaie toute seule dès que la connexion revient.</p>
+      <button type="button" class="bouton" id="reessayer">Réessayer</button>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Adresse de l'app FOCUS LAB en ligne.
+     Si elle change (par exemple ton propre domaine), modifie-la ici ET dans
+     server.allowNavigation de capacitor.config.json, puis republie l'app. */
+  var FOCUS_LAB_URL = 'https://focus-on-performance.bouba-ousmanad.chatgpt.site/';
+
+  var DELAI_MAX_MS = 8000;      // attente maximale de la vérification
+  var root = document.documentElement;
+  var bouton = document.getElementById('reessayer');
+  var enCours = false;
+  var essais = 0;
+  var minuterie = null;
+
+  function afficher(etat) { root.setAttribute('data-etat', etat); }
+
+  /* Garde-fou : si cette page revient trop souvent en peu de temps (le site répond
+     mais ses pages ne se chargent pas), on arrête les relances automatiques. */
+  function tropDeRetours() {
+    try {
+      var maintenant = Date.now();
+      var passages = JSON.parse(sessionStorage.getItem('focusLabRetours') || '[]')
+        .filter(function (t) { return maintenant - t < 60000; });
+      passages.push(maintenant);
+      sessionStorage.setItem('focusLabRetours', JSON.stringify(passages));
+      return passages.length > 3;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /* Vérifie que FOCUS LAB répond. La réponse « no-cors » est opaque, mais une
+     coupure réseau fait échouer la requête : c'est tout ce qu'on veut savoir. */
+  function joignable() {
+    var controleur = typeof AbortController === 'function' ? new AbortController() : null;
+    var delai = setTimeout(function () { if (controleur) controleur.abort(); }, DELAI_MAX_MS);
+    var options = { mode: 'no-cors', cache: 'no-store' };
+    if (controleur) options.signal = controleur.signal;
+    return fetch(FOCUS_LAB_URL, options).then(
+      function () { clearTimeout(delai); return true; },
+      function () { clearTimeout(delai); return false; }
+    );
+  }
+
+  function ouvrir() {
+    if (enCours) return;
+    enCours = true;
+    clearTimeout(minuterie);
+    afficher('chargement');
+    joignable().then(function (ok) {
+      enCours = false;
+      if (ok) {
+        // replace() : cette page ne reste pas dans l'historique du bouton retour
+        window.location.replace(FOCUS_LAB_URL);
+        return;
+      }
+      afficher('hors-ligne');
+      essais += 1;
+      // Nouvel essai automatique, de plus en plus espacé (3 s, 6 s, 9 s… jusqu'à 30 s)
+      minuterie = setTimeout(ouvrir, Math.min(30000, 3000 * essais));
+    });
+  }
+
+  bouton.addEventListener('click', function () { essais = 0; ouvrir(); });
+  window.addEventListener('online', function () { essais = 0; ouvrir(); });
+
+  if (tropDeRetours()) {
+    afficher('hors-ligne');
+  } else {
+    ouvrir();
+  }
+})();
+</script>
+</body>
+</html>
