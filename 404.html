@@ -9,10 +9,9 @@
 <script>
   /* GitHub Pages : une adresse inconnue, ou la racine du site, renvoie vers la page vitrine. */
   (function () {
-    if (/coach\.html$/.test(location.pathname)) return;
     var seg = location.pathname.split('/')[1];
     var base = /\.github\.io$/.test(location.hostname) && seg ? '/' + seg + '/' : '/';
-    location.replace(base + 'coach.html');
+    location.replace(base);
   })();
 </script>
 <style>
@@ -25,7 +24,7 @@
 <body>
 <main>
   <p>Cette page n’existe pas.</p>
-  <p><a href="coach.html">Aller sur Focus &amp; Performance</a></p>
+  <p><a href="/">Aller sur Focus &amp; Performance</a></p>
 </main>
 </body>
 </html>
