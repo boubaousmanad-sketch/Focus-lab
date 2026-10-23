@@ -2,29 +2,116 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Focus &amp; Performance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page introuvable | Focus &amp; Performance</title>
+<meta name="description" content="Cette page n’existe pas ou a changé d’adresse.">
 <meta name="robots" content="noindex">
+<!-- Adresse officielle du site : focusandperformance.com.
+     L’app FOCUS LAB, le fil du coach et la confidentialité restent sur ChatGPT Sites : leurs liens dans cette page pointent vers focus-on-performance.bouba-ousmanad.chatgpt.site. -->
 <meta name="theme-color" content="#000000">
-<script>
-  /* GitHub Pages : une adresse inconnue, ou la racine du site, renvoie vers la page vitrine. */
-  (function () {
-    var seg = location.pathname.split('/')[1];
-    var base = /\.github\.io$/.test(location.hostname) && seg ? '/' + seg + '/' : '/';
-    location.replace(base);
-  })();
-</script>
-<style>
-  html{background:#000;color:#edeae3;color-scheme:dark;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.0625rem;line-height:1.55}
-  body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;box-sizing:border-box}
-  p{margin:0 0 12px}
-  a{color:#edeae3;font-weight:700;text-decoration:underline;text-decoration-color:#c9a24d;text-decoration-thickness:2px;text-underline-offset:.25em}
-</style>
+<link rel="icon" href="/images/favicon-fp.png">
+<link rel="apple-touch-icon" href="/images/favicon-fp.png">
+<!-- Police Archivo hébergée avec le site (licence libre OFL, voir fonts/OFL-Archivo.txt) : rien n’est chargé depuis Google. -->
+<!-- Photo d’ouverture annoncée tôt : c’est le plus gros élément visible au chargement. -->
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
-<main>
-  <p>Cette page n’existe pas.</p>
-  <p><a href="/">Aller sur Focus &amp; Performance</a></p>
+<body class="page-sub">
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/">
+      <span class="brand-mark">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1.5"/><text x="20" y="25.4" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg>
+        <img src="/images/logo-fp-177.webp" alt="" width="59" height="38" decoding="async">
+      </span>
+      <span>Focus &amp; Performance</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="mb-lines" aria-hidden="true"></span><span class="mb-txt">Menu</span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="/programmes.html">Programmes</a></li>
+        <li><a href="/methode.html">Méthode</a></li>
+        <li><a href="/nutrition.html">Nutrition</a></li>
+        <li><a href="/le-coach.html">Le coach</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li class="nav-client"><a href="https://focus-on-performance.bouba-ousmanad.chatgpt.site/index.html">Espace client</a></li>
+      </ul>
+      <div class="nav-foot">
+        <a class="btn btn-gold" href="/contact.html">Parler de mon objectif</a>
+        <p>Namur · en ligne · hybride</p>
+      </div>
+    </nav>
+    <a class="btn btn-gold header-cta" href="/contact.html">Parler de mon objectif</a>
+  </div>
+</header>
+
+<main id="contenu">
+  <section class="page-hero hors-piste" aria-labelledby="page-titre">
+    <figure class="ph-media"><picture><source type="image/avif" srcset="/images/running-piste-600.avif 600w, /images/running-piste-1100.avif 1100w" sizes="(min-width: 960px) 46vw, 100vw"><img src="/images/running-piste.webp" srcset="/images/running-piste-600.webp 600w, /images/running-piste.webp 1100w" sizes="(min-width: 960px) 46vw, 100vw" alt="" width="1100" height="1954" fetchpriority="high" decoding="async"></picture></figure>
+    <div class="wrap ph-inner">
+      <p class="eyebrow">Erreur 404</p>
+      <h1 class="ph-title" id="page-titre"><span class="ln"><span>Hors piste.</span></span></h1>
+      <p class="ph-lead">Cette page n’existe pas ou a changé d’adresse. Reprends ta course depuis l’accueil.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="/">Retour à l’accueil</a>
+        <a class="btn btn-ghost" href="/programmes.html">Voir les programmes</a>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <p class="footer-claim"><span class="fc-1">Focus on.</span><span class="fc-2">Limits off.</span></p>
+      <a class="btn btn-gold" href="/contact.html">Parler de mon objectif</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <picture><source type="image/avif" srcset="/images/logo-focus-on-264.avif 264w, /images/logo-focus-on-396.avif 396w" sizes="132px"><img class="footer-logo" src="/images/logo-focus-on-264.webp" srcset="/images/logo-focus-on-264.webp 264w, /images/logo-focus-on-396.webp 396w" sizes="132px" alt="Focus &amp; Performance : Focus on. Limits off. Mindset, progression, performance." width="640" height="607" loading="lazy" decoding="async"></picture>
+        <p>Préparation physique sur mesure, à Namur et en ligne.</p>
+      </div>
+      <nav aria-label="Explorer le site">
+        <p class="footer-h">Explorer</p>
+        <ul>
+          <li><a href="/programmes.html">Programmes</a></li>
+          <li><a href="/methode.html">Méthode</a></li>
+          <li><a href="/nutrition.html">Nutrition</a></li>
+          <li><a href="/le-coach.html">Le coach</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Espaces">
+        <p class="footer-h">Espaces</p>
+        <ul>
+          <li><a href="https://focus-on-performance.bouba-ousmanad.chatgpt.site/index.html">Espace client FOCUS&nbsp;LAB</a></li>
+          <li><a href="/espace-coach/" rel="nofollow">Espace coach</a></li>
+          <li><a href="https://focus-on-performance.bouba-ousmanad.chatgpt.site/journal.html">Le fil du coach</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="footer-h">Contact</p>
+        <ul>
+          <li><a data-contact-email href="mailto:bouba.ousmanad@gmail.com">bouba.ousmanad@gmail.com</a></li>
+          <li data-instagram-item hidden><a data-instagram href="#">Instagram</a></li>
+          <li><a href="/le-coach.html#running-club">Running Club</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>© <span data-year>2026</span> Focus &amp; Performance, Bouba&nbsp;Ousmana</p>
+      <a href="https://focus-on-performance.bouba-ousmanad.chatgpt.site/confidentialite.html">Confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" data-sticky>
+  <a class="btn btn-gold" href="/contact.html">Parler de mon objectif</a>
+</div>
+
+<script src="/assets/site.js"></script>
 </body>
 </html>

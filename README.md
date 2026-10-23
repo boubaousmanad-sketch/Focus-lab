@@ -31,3 +31,6 @@ Avec GitHub Pages (Settings, Pages, « Deploy from a branch », branche `main`, 
 - Pages intérieures : ouverture photo avec grand titre, page suivante en bas.
 - En-tête transparent sur la photo, menu plein écran sur téléphone, transitions entre les pages.
 - `outils/construire-site-premium.py` : script qui a produit cette version à partir de l’ancienne.
+- Accueil : les photos d’ouverture se relaient en fondu (chargées après la page, arrêtées si « réduire les animations »).
+- Nutrition : anneau protéines / glucides / lipides au lieu d’une photo, bloc « Ton plan, partout ».
+- Partage et Google : titres et descriptions par page, fil d’Ariane et FAQ en données structurées, page 404 « Hors piste ».

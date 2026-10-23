@@ -150,6 +150,33 @@
   var resizeTimer;
   window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitDisplay, 120); });
 
+  /* Ouverture de l’accueil : les photos suivantes se chargent après la page, puis se relaient en fondu. */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('[data-slides] .hero-slide'));
+  var sansMouvement = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (slides.length > 1 && !sansMouvement) {
+    var chargeSlides = function () {
+      var attentes = slides.slice(1).map(function (sl) {
+        sl.querySelectorAll('[data-srcset]').forEach(function (x) { x.setAttribute('srcset', x.getAttribute('data-srcset')); x.removeAttribute('data-srcset'); });
+        var im = sl.querySelector('img');
+        if (im.getAttribute('data-src')) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }
+        return im.decode ? im.decode().catch(function () {}) : Promise.resolve();
+      });
+      Promise.all(attentes).then(function () {
+        var prets = slides.filter(function (sl, k) { return k === 0 || sl.querySelector('img').naturalWidth > 0; });
+        if (prets.length < 2) return;
+        var i = 0;
+        setInterval(function () {
+          if (document.hidden) return;
+          prets[i].classList.remove('is-on');
+          i = (i + 1) % prets.length;
+          prets[i].classList.add('is-on');
+        }, 6500);
+      });
+    };
+    var plusTard = function () { setTimeout(chargeSlides, 1200); };
+    if (document.readyState === 'complete') plusTard(); else window.addEventListener('load', plusTard);
+  }
+
   /* Programmes : « Parler de ce programme » pré-remplit le formulaire. */
   document.querySelectorAll('[data-programme]').forEach(function (a) {
     a.addEventListener('click', function () { prefill('', a.getAttribute('data-programme'), ''); });
@@ -336,10 +363,10 @@
     var CIBLES = ['.section-head > *', '.head-copy > *', '.pillar', '.tile', '.prog-cards > li', '.plan', '.included', '.price-note', '.profile',
       '.step', '.rules', '.loop-note', '.features > div', '.faq details', '.faq-layout > :first-child', '.lab-head > *', '.lab-phone',
       '.coach-photo', '.coach-copy > *', '.quiz', '.g-item', '.band-copy > *', '.excuses-photo', '.excuses-copy > *',
-      '.club-copy > *', '.club-photo', '.contact-intro > *', '.form', '.cta-inner > *', '.next-link', '.footer-top > *'];
+      '.club-copy > *', '.club-photo', '.contact-intro > *', '.form', '.cta-inner > *', '.next-link', '.footer-top > *', '.duo > li'];
     var vus = [];
     document.querySelectorAll(CIBLES.join(',')).forEach(function (el) {
-      if (el.closest('.hero, .page-hero, .site-nav') || el.classList.contains('head-copy') || vus.indexOf(el) > -1) return;
+      if (el.hidden || el.closest('.hero, .page-hero, .site-nav') || el.classList.contains('head-copy') || vus.indexOf(el) > -1) return;
       vus.push(el);
     });
     var ro = new IntersectionObserver(function (es) {
