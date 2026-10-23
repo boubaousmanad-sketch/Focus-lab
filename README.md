@@ -23,3 +23,11 @@ L'objet `CONFIG`, en bas de `coach.html`, contient l'e-mail de contact et le com
 Publie `coach.html` avec les dossiers `images/` et `fonts/` à la racine du site.
 
 Avec GitHub Pages (Settings, Pages, « Deploy from a branch », branche `main`, dossier racine), la vitrine est publiée à https://boubaousmanad-sketch.github.io/Focus-lab/coach.html et se met à jour à chaque modification de la branche `main`. `404.html` renvoie les adresses inconnues, et la racine du site, vers la vitrine. L’app FOCUS LAB, le fil du coach et la confidentialité restent sur ChatGPT Sites : les liens de `coach.html` pointent vers ces pages.
+
+## Version haut de gamme (octobre 2026)
+
+- Styles et script communs : `assets/site.css` et `assets/site.js` (mis en cache d’une page à l’autre).
+- Accueil : ouverture plein écran, défilé de mots, cartes VERSUS / BUILD / PERFORMANCE, tuiles, bandeau photo, pied de page complet.
+- Pages intérieures : ouverture photo avec grand titre, page suivante en bas.
+- En-tête transparent sur la photo, menu plein écran sur téléphone, transitions entre les pages.
+- `outils/construire-site-premium.py` : script qui a produit cette version à partir de l’ancienne.
