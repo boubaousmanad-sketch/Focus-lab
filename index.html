@@ -571,10 +571,10 @@ p{margin:0}
 .page-sub main > .section:first-child{padding-top:clamp(40px,6vw,72px)}
 
 /* Apparitions au défilement */
-html.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease var(--d,0ms),transform .8s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+html.js .reveal{opacity:0;transform:translateY(12px);transition:opacity .45s ease var(--d,0ms),transform .5s ease var(--d,0ms)}
 html.js .reveal.is-in{opacity:1;transform:none}
 .tile a{transition:border-color .25s ease,transform .35s cubic-bezier(.2,.7,.2,1)}
-.tile a:hover{transform:translateY(-4px)}
+.tile a:hover{transform:translateY(-2px)}
 .btn{transition:background-color .15s,border-color .15s,color .15s,transform .2s ease}
 .btn:active{transform:scale(.98)}
 @media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none}.tile a:hover{transform:none}}
@@ -664,7 +664,7 @@ html.js .reveal.is-in{opacity:1;transform:none}
       <ul class="tiles">
         <li class="tile">
           <a href="/programmes.html">
-            <picture><source type="image/avif" srcset="images/cover-versus-480.avif"><img src="images/cover-versus-480.webp" alt="" width="480" height="600" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/running-piste-600.avif"><img src="images/running-piste-600.webp" alt="" width="600" height="800" loading="lazy" decoding="async"></picture>
             <span class="tile-k">01</span>
             <span class="tile-t">Programmes</span>
             <span class="tile-d">VERSUS, BUILD, PERFORMANCE : lequel est fait pour toi&#8239;?</span>
@@ -688,7 +688,7 @@ html.js .reveal.is-in{opacity:1;transform:none}
         </li>
         <li class="tile">
           <a href="/le-coach.html">
-            <picture><source type="image/avif" srcset="images/coach-squat-500.avif"><img src="images/coach-squat-500.webp" alt="" width="500" height="889" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/avif" srcset="images/excuses-piste-500.avif"><img src="images/excuses-piste-500.webp" alt="" width="500" height="700" loading="lazy" decoding="async"></picture>
             <span class="tile-k">04</span>
             <span class="tile-t">Le coach</span>
             <span class="tile-d">Bouba Ousmana, le Running Club et tes questions.</span>
@@ -1060,10 +1060,10 @@ html.js .reveal.is-in{opacity:1;transform:none}
   if ('IntersectionObserver' in window && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
     var aRevoir = [];
     document.querySelectorAll('main .section > .wrap > *, main .seances > .wrap > *, main .manifesto .wrap > *').forEach(function (el) { aRevoir.push(el); });
-    document.querySelectorAll('.tiles .tile').forEach(function (el, i) { el.style.setProperty('--d', (i * 90) + 'ms'); aRevoir.push(el); });
+    document.querySelectorAll('.tiles .tile').forEach(function (el, i) { el.style.setProperty('--d', (i * 60) + 'ms'); aRevoir.push(el); });
     var ro = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px 15% 0px', threshold: 0 });
     aRevoir.forEach(function (el) { if (el.classList.contains('tiles')) return; el.classList.add('reveal'); ro.observe(el); });
   }
 
