@@ -574,6 +574,7 @@ html.js .reveal.is-in{opacity:1;transform:none}
 .btn{transition:background-color .15s,border-color .15s,color .15s,transform .2s ease}
 .btn:active{transform:scale(.98)}
 @media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none}.tile a:hover{transform:none}}
+[hidden]{display:none!important}
 </style>
 </head>
 <body class="page-sub">
@@ -604,126 +605,6 @@ html.js .reveal.is-in{opacity:1;transform:none}
 </header>
 
 <main id="contenu">
-  <section class="section" id="pour-qui" aria-labelledby="pour-qui-titre">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="pour-qui-titre">Une préparation pour ton sport ou ton métier</h2>
-        <p class="lead">Chaque programme part de ce que ton activité exige de ton corps, et de ce que tu es capable de faire aujourd’hui.</p>
-      </div>
-      <ul class="profiles">
-        <li class="profile">
-          <h3>Sports de combat</h3>
-          <p>Force, puissance et capacité à répéter les efforts, planifiées jusqu’à la date du combat.</p>
-          <p class="aim"><span>On vise</span>le jour du combat</p>
-        </li>
-        <li class="profile">
-          <h3>Football</h3>
-          <p>Vitesse, changements de direction et prévention des blessures, avec des programmes par catégorie d’âge, des jeunes aux adultes.</p>
-          <p class="aim"><span>On vise</span>toute la saison</p>
-        </li>
-        <li class="profile">
-          <h3>Métiers d’intervention</h3>
-          <p>Police, armée&nbsp;: une condition physique à la hauteur des exigences du terrain et des tests physiques.</p>
-          <p class="aim"><span>On vise</span>les tests et le terrain</p>
-        </li>
-        <li class="profile">
-          <h3>Perte de poids avec VERSUS</h3>
-          <p>Le concept VERSUS&nbsp;: toi contre toi-même. Des entraînements structurés, une nutrition adaptée sans régime extrême et des habitudes qui tiennent.</p>
-          <p class="aim"><span>On vise</span>un changement qui tient</p>
-        </li>
-        <li class="profile">
-          <h3>Prise de masse avec BUILD</h3>
-          <p>Le programme BUILD&nbsp;: construis ta masse et développe ta force, avec une progression mesurable.</p>
-          <p class="aim"><span>On vise</span>une prise de masse mesurée</p>
-        </li>
-        <li class="profile">
-          <h3>Conditionnement avec PERFORMANCE</h3>
-          <p>Le programme PERFORMANCE&nbsp;: plus endurant, plus fort, plus complet, pour le ring, le terrain ou HYROX.</p>
-          <p class="aim"><span>On vise</span>tenir l’intensité plus longtemps</p>
-        </li>
-        <li class="profile">
-          <h3>Course à pied</h3>
-          <p>Des séances fractionnées programmées, et le Running Club Focus &amp; Performance pour courir ensemble.</p>
-          <p class="aim"><span>On vise</span>ta prochaine course</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-  <section class="section js-only" id="trouve" aria-labelledby="trouve-titre">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="trouve-titre">Trouve ton programme</h2>
-        <p class="lead">Cinq questions rapides. Tu découvres le programme qui te correspond, et ta demande est déjà préparée.</p>
-      </div>
-      <div class="quiz" data-quiz>
-        <div class="quiz-progress" aria-hidden="true"><span data-quiz-count>1 sur 5</span><span class="quiz-bar"><span data-quiz-bar></span></span></div>
-        <div class="quiz-step" data-step="objectif">
-          <h3 tabindex="-1">Ton objectif principal&#8239;?</h3>
-          <div class="quiz-options">
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="poids">Perdre du poids</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="muscle">Prendre du muscle</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="condition">Améliorer ma condition<small>Endurance, cardio, HYROX</small></button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="echeance">Préparer une échéance<small>Combat, saison, tests</small></button>
-          </div>
-        </div>
-        <div class="quiz-step" data-step="contexte" hidden>
-          <h3 tabindex="-1">Ton sport ou ton métier&#8239;?</h3>
-          <div class="quiz-options">
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="combat">Sports de combat</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="football">Football</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="intervention">Police, armée</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="course">Course à pied</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="salle">Salle ou fitness</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="aucun">Aucun en particulier</button>
-          </div>
-        </div>
-        <div class="quiz-step" data-step="niveau" hidden>
-          <h3 tabindex="-1">Ton niveau aujourd’hui&#8239;?</h3>
-          <div class="quiz-options">
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="debut">Je débute</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="regulier">Je m’entraîne régulièrement</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="competiteur">Je suis compétiteur</button>
-          </div>
-        </div>
-        <div class="quiz-step" data-step="lieu" hidden>
-          <h3 tabindex="-1">Où t’entraînes-tu&#8239;?</h3>
-          <div class="quiz-options">
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="salle">En salle</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="maison">À la maison</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="dehors">Dehors ou sur le terrain</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="mixte">Un peu de tout</button>
-          </div>
-        </div>
-        <div class="quiz-step" data-step="frequence" hidden>
-          <h3 tabindex="-1">Combien de séances par semaine&#8239;?</h3>
-          <div class="quiz-options">
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="2">2 séances</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="3-4">3 ou 4 séances</button>
-            <button class="quiz-opt" type="button" aria-pressed="false" data-value="5">5 séances ou plus</button>
-          </div>
-        </div>
-        <div class="quiz-result" data-result hidden>
-          <p class="r-kicker">Ton programme</p>
-          <h3 tabindex="-1" data-r-name>BUILD</h3>
-          <p class="r-goal" data-r-goal>Prise de masse</p>
-          <p class="r-profile" data-r-profile></p>
-          <p class="r-text" data-r-text></p>
-          <ol class="r-steps">
-            <li>Un premier échange pour cadrer ton objectif</li>
-            <li>Des tests de départ adaptés à ton profil</li>
-            <li>Ton premier bloc, suivi dans FOCUS LAB</li>
-          </ol>
-          <div class="r-actions">
-            <a class="btn btn-gold" href="/contact.html" data-r-send>Envoyer ma demande</a>
-            <button class="btn btn-ghost" type="button" data-r-restart>Recommencer</button>
-          </div>
-          <a class="dm-link" href="https://ig.me/m/focus4performance?ref=site_quiz" data-dm target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span data-r-dm>Ou écris-moi en DM sur Instagram</span></a>
-        </div>
-        <div class="quiz-nav"><button class="quiz-back" type="button" data-quiz-back hidden>Question précédente</button></div>
-        <p class="visually-hidden" aria-live="polite" data-quiz-live></p>
-      </div>
-    </div>
-  </section>
   <section class="section" id="offres" aria-labelledby="offres-titre">
     <div class="wrap">
       <div class="section-head">
@@ -816,6 +697,126 @@ html.js .reveal.is-in{opacity:1;transform:none}
         </ul>
       </div>
       <p class="price-note">Le tarif dépend du programme et de la durée. Je te le donne lors du premier échange, avant tout engagement.</p>
+    </div>
+  </section>
+  <section class="section js-only" id="trouve" aria-labelledby="trouve-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="trouve-titre">Trouve ton programme</h2>
+        <p class="lead">Cinq questions rapides. Tu découvres le programme qui te correspond, et ta demande est déjà préparée.</p>
+      </div>
+      <div class="quiz" data-quiz>
+        <div class="quiz-progress" aria-hidden="true"><span data-quiz-count>1 sur 5</span><span class="quiz-bar"><span data-quiz-bar></span></span></div>
+        <div class="quiz-step" data-step="objectif">
+          <h3 tabindex="-1">Ton objectif principal&#8239;?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="poids">Perdre du poids</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="muscle">Prendre du muscle</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="condition">Améliorer ma condition<small>Endurance, cardio, HYROX</small></button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="echeance">Préparer une échéance<small>Combat, saison, tests</small></button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="contexte" hidden>
+          <h3 tabindex="-1">Ton sport ou ton métier&#8239;?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="combat">Sports de combat</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="football">Football</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="intervention">Police, armée</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="course">Course à pied</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="salle">Salle ou fitness</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="aucun">Aucun en particulier</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="niveau" hidden>
+          <h3 tabindex="-1">Ton niveau aujourd’hui&#8239;?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="debut">Je débute</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="regulier">Je m’entraîne régulièrement</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="competiteur">Je suis compétiteur</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="lieu" hidden>
+          <h3 tabindex="-1">Où t’entraînes-tu&#8239;?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="salle">En salle</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="maison">À la maison</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="dehors">Dehors ou sur le terrain</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="mixte">Un peu de tout</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="frequence" hidden>
+          <h3 tabindex="-1">Combien de séances par semaine&#8239;?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="2">2 séances</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="3-4">3 ou 4 séances</button>
+            <button class="quiz-opt" type="button" aria-pressed="false" data-value="5">5 séances ou plus</button>
+          </div>
+        </div>
+        <div class="quiz-result" data-result hidden>
+          <p class="r-kicker">Ton programme</p>
+          <h3 tabindex="-1" data-r-name>BUILD</h3>
+          <p class="r-goal" data-r-goal>Prise de masse</p>
+          <p class="r-profile" data-r-profile></p>
+          <p class="r-text" data-r-text></p>
+          <ol class="r-steps">
+            <li>Un premier échange pour cadrer ton objectif</li>
+            <li>Des tests de départ adaptés à ton profil</li>
+            <li>Ton premier bloc, suivi dans FOCUS LAB</li>
+          </ol>
+          <div class="r-actions">
+            <a class="btn btn-gold" href="/contact.html" data-r-send>Envoyer ma demande</a>
+            <button class="btn btn-ghost" type="button" data-r-restart>Recommencer</button>
+          </div>
+          <a class="dm-link" href="https://ig.me/m/focus4performance?ref=site_quiz" data-dm target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span data-r-dm>Ou écris-moi en DM sur Instagram</span></a>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" type="button" data-quiz-back hidden>Question précédente</button></div>
+        <p class="visually-hidden" aria-live="polite" data-quiz-live></p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="pour-qui" aria-labelledby="pour-qui-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="pour-qui-titre">Une préparation pour ton sport ou ton métier</h2>
+        <p class="lead">Chaque programme part de ce que ton activité exige de ton corps, et de ce que tu es capable de faire aujourd’hui.</p>
+      </div>
+      <ul class="profiles">
+        <li class="profile">
+          <h3>Sports de combat</h3>
+          <p>Force, puissance et capacité à répéter les efforts, planifiées jusqu’à la date du combat.</p>
+          <p class="aim"><span>On vise</span>le jour du combat</p>
+        </li>
+        <li class="profile">
+          <h3>Football</h3>
+          <p>Vitesse, changements de direction et prévention des blessures, avec des programmes par catégorie d’âge, des jeunes aux adultes.</p>
+          <p class="aim"><span>On vise</span>toute la saison</p>
+        </li>
+        <li class="profile">
+          <h3>Métiers d’intervention</h3>
+          <p>Police, armée&nbsp;: une condition physique à la hauteur des exigences du terrain et des tests physiques.</p>
+          <p class="aim"><span>On vise</span>les tests et le terrain</p>
+        </li>
+        <li class="profile">
+          <h3>Perte de poids avec VERSUS</h3>
+          <p>Le concept VERSUS&nbsp;: toi contre toi-même. Des entraînements structurés, une nutrition adaptée sans régime extrême et des habitudes qui tiennent.</p>
+          <p class="aim"><span>On vise</span>un changement qui tient</p>
+        </li>
+        <li class="profile">
+          <h3>Prise de masse avec BUILD</h3>
+          <p>Le programme BUILD&nbsp;: construis ta masse et développe ta force, avec une progression mesurable.</p>
+          <p class="aim"><span>On vise</span>une prise de masse mesurée</p>
+        </li>
+        <li class="profile">
+          <h3>Conditionnement avec PERFORMANCE</h3>
+          <p>Le programme PERFORMANCE&nbsp;: plus endurant, plus fort, plus complet, pour le ring, le terrain ou HYROX.</p>
+          <p class="aim"><span>On vise</span>tenir l’intensité plus longtemps</p>
+        </li>
+        <li class="profile">
+          <h3>Course à pied</h3>
+          <p>Des séances fractionnées programmées, et le Running Club Focus &amp; Performance pour courir ensemble.</p>
+          <p class="aim"><span>On vise</span>ta prochaine course</p>
+        </li>
+      </ul>
     </div>
   </section>
 </main>
