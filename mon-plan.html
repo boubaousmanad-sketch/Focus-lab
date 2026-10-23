@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ton plan alimentaire | Focus &amp; Performance</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/images/favicon-fp.png">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Archivo";src:url("/fonts/archivo-latin.woff2") format("woff2");font-weight:400 900;font-stretch:62% 125%;font-display:swap}
+:root{--noir:#000;--fonte:#121110;--fonte-2:#1a1917;--trait:#2b2925;--trait-fort:#3d3a35;--craie:#edeae3;--craie-2:#cdc9bf;--acier:#9c978e;--or:#c9a24d;--or-vif:#dcb75f;--gutter:clamp(16px,5vw,40px);color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--noir)}
+body{margin:0;background:var(--noir);color:var(--craie);font-family:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.0625rem;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 var(--gutter)}
+header{border-bottom:1px solid var(--trait)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:87.5%;text-decoration:none}
+.brand svg{width:38px;height:38px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border:1px solid var(--or);border-radius:6px;background:var(--or);color:#000;font:inherit;font-size:.9375rem;font-weight:700;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--or-vif)}
+.btn-ghost{background:transparent;color:var(--craie);border-color:var(--trait-fort)}
+.btn-ghost:hover{background:transparent;border-color:var(--craie)}
+main{padding:clamp(28px,6vw,56px) 0 72px}
+.kicker{color:var(--or);font-weight:700;font-size:.875rem;letter-spacing:.06em;text-transform:uppercase}
+h1{margin:6px 0 10px;font-size:clamp(2.5rem,9vw,4.25rem);font-stretch:75%;font-weight:800;line-height:.92}
+.sub{margin:0;color:var(--craie-2)}
+.macros{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:24px 0}
+.macros div{padding:12px;border:1px solid var(--trait);border-radius:10px;background:var(--fonte)}
+.macros b{display:block;font-size:1.375rem;font-stretch:87.5%;font-variant-numeric:tabular-nums}
+.macros span{color:var(--acier);font-size:.8125rem}
+.days{display:flex;gap:6px;overflow-x:auto;margin:8px 0 20px;padding-bottom:4px;scrollbar-width:none}
+.days button{flex:0 0 auto;min-width:58px;min-height:52px;padding:6px 10px;border:1px solid var(--trait-fort);border-radius:8px;background:transparent;color:var(--craie);font:inherit;font-weight:700;cursor:pointer}
+.days button small{display:block;color:var(--acier);font-size:.6875rem;font-weight:600}
+.days button[aria-pressed="true"]{border-color:var(--or);background:rgba(201,162,77,.14);color:var(--or)}
+.day{animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.dayhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;padding:14px 16px;border-left:4px solid var(--or);background:var(--fonte);border-radius:0 10px 10px 0}
+.dayhead h2{margin:0;font-size:1.75rem;font-stretch:75%;line-height:1}
+.dayhead p{margin:0;color:var(--craie-2);font-size:.875rem;font-variant-numeric:tabular-nums}
+.meal{margin-top:18px;padding:16px;border:1px solid var(--trait);border-radius:12px;background:var(--fonte);animation:in .4s ease both}
+.meal h3{display:flex;justify-content:space-between;gap:12px;margin:0 0 8px;font-size:1.125rem}
+.meal h3 span{color:var(--acier);font-weight:500;font-size:.875rem;white-space:nowrap}
+.meal ul{margin:0;padding:0;list-style:none}
+.meal li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:9px 0;border-top:1px solid var(--trait)}
+.meal li b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.libre{color:var(--or)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.note{margin-top:24px;color:var(--acier);font-size:.875rem}
+.vide{padding:24px;border:1px solid var(--trait);border-radius:12px;background:var(--fonte)}
+.print-only{display:none}
+@media (prefers-reduced-motion:reduce){.day,.meal{animation:none}}
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff;color:#000}
+  header,.days,.actions,.note{display:none}
+  .print-only{display:block}
+  .pr-head{display:flex;align-items:center;gap:12px;padding:12px 16px;margin-bottom:16px;background:#000;color:#edeae3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pr-head svg{width:44px;height:44px}
+  .pr-head b{display:block;font-size:16px}.pr-head small{color:#c9a24d}
+  main{padding:0}
+  .macros div,.dayhead,.meal{background:#fff;border-color:#ccc;color:#000}
+  .macros span,.meal h3 span,.dayhead p{color:#555}
+  .day{display:block!important;break-inside:auto;margin-bottom:18px}
+  .meal{break-inside:avoid;animation:none}
+  .kicker,.libre{color:#8a6b22}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head">
+    <a class="brand" href="/"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1.5"/><text x="20" y="25.4" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg>Focus &amp; Performance</a>
+    <button class="btn" type="button" data-print hidden>PDF</button>
+  </div>
+</header>
+<main class="wrap" id="app">
+  <div class="print-only pr-head"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1.5"/><text x="20" y="25.4" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg><span><b>FOCUS &amp; PERFORMANCE</b><small>Plus loin. Ensemble.</small></span></div>
+  <div class="vide" data-vide>
+    <p>Ouverture de ton plan…</p>
+  </div>
+</main>
+<script>
+(function () {
+  'use strict';
+  /* Le plan arrive dans le lien envoyé par le coach (après le #). Il n’est jamais envoyé au serveur. */
+  var app = document.getElementById('app'), NN = ' ';
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function grp(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, NN); }
+  function oct(s) { s = s.replace(/-/g, '+').replace(/_/g, '/'); var r = atob(s), u = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) u[i] = r.charCodeAt(i); return u; }
+  function lit(h) {
+    if (!h || h.length < 3) return Promise.reject();
+    var t = h.charAt(0), u = oct(h.slice(1));
+    if (t === 'j') return Promise.resolve(JSON.parse(new TextDecoder().decode(u)));
+    if (t === 'z' && window.DecompressionStream) {
+      var ds = new Blob([u]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+      return new Response(ds).text().then(JSON.parse);
+    }
+    return Promise.reject();
+  }
+  function vide(msg) { app.querySelector('[data-vide]').innerHTML = '<p>' + msg + '</p><p><a class="btn btn-ghost" href="/">Aller sur Focus &amp; Performance</a></p>'; }
+  lit(location.hash.slice(1)).then(function (P) {
+    if (!P || !P.j || !P.j.length) throw new Error();
+    document.title = 'Plan alimentaire de ' + P.c + ' | Focus & Performance';
+    var d = new Date(P.d + 'T12:00:00');
+    var html = '<p class="kicker">Ton plan alimentaire</p><h1>' + esc(P.c) + '</h1>' +
+      '<p class="sub">' + esc(P.o) + ' · préparé le ' + d.toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' }) + '</p>' +
+      '<div class="macros"><div><b>' + grp(P.m.k) + '</b><span>kcal / jour</span></div><div><b>' + grp(P.m.p) + NN + 'g</b><span>protéines</span></div><div><b>' + grp(P.m.g) + NN + 'g</b><span>glucides</span></div><div><b>' + grp(P.m.l) + NN + 'g</b><span>lipides</span></div></div>' +
+      '<div class="days" role="group" aria-label="Jour">' + P.j.map(function (j, i) {
+        return '<button type="button" aria-pressed="' + (i === 0) + '" data-d="' + i + '">' + esc(j.n.slice(0, 3)) + '<small>' + (j.on ? 'ON' : 'OFF') + '</small></button>';
+      }).join('') + '</div>' +
+      P.j.map(function (j, i) {
+        return '<section class="day" data-day="' + i + '"' + (i ? ' hidden' : '') + '><div class="dayhead"><h2>' + esc(j.n) + '</h2><p>' + (j.on ? 'Jour d’entraînement' : 'Jour de repos') + ' · ' + grp(j.k) + NN + 'kcal · P ' + j.p + ' · G ' + j.g + ' · L ' + j.l + NN + 'g</p></div>' +
+          j.r.map(function (r, k) {
+            var tot = r.i.reduce(function (s, it) { return s + it[2]; }, 0);
+            return '<article class="meal" style="animation-delay:' + (k * 60) + 'ms"><h3>' + esc(r.n) + (r.f ? ' <span class="libre">repas libre</span>' : '<span>' + grp(tot) + NN + 'kcal</span>') + '</h3>' +
+              (r.i.length ? '<ul>' + r.i.map(function (it) { return '<li><span>' + esc(it[0]) + '</span><b>' + esc(it[1]) + '</b></li>'; }).join('') + '</ul>' : '') + '</article>';
+          }).join('') + '</section>';
+      }).join('') +
+      '<div class="actions"><button class="btn" type="button" data-print>Enregistrer en PDF</button><a class="btn btn-ghost" href="/contact.html">Écrire à mon coach</a></div>' +
+      '<p class="note">Quantités en poids crus, avant cuisson. Ton plan est ajusté avec ton coach selon tes résultats.</p>';
+    app.querySelector('[data-vide]').outerHTML = html;
+    var printBtns = document.querySelectorAll('[data-print]');
+    printBtns.forEach(function (b) { b.hidden = false; b.addEventListener('click', function () { window.print(); }); });
+    app.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-d]'); if (!b) return;
+      var i = b.getAttribute('data-d');
+      app.querySelectorAll('[data-d]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      app.querySelectorAll('[data-day]').forEach(function (s) { s.hidden = s.getAttribute('data-day') !== i; });
+    });
+    window.addEventListener('beforeprint', function () { app.querySelectorAll('[data-day]').forEach(function (s) { s.dataset.h = s.hidden ? '1' : ''; s.hidden = false; }); });
+    window.addEventListener('afterprint', function () { app.querySelectorAll('[data-day]').forEach(function (s) { s.hidden = s.dataset.h === '1'; }); });
+  }).catch(function () { vide('Ce lien de plan est incomplet ou ne s’ouvre pas dans ce navigateur. Demande à ton coach de te le renvoyer.'); });
+})();
+</script>
+</body>
+</html>

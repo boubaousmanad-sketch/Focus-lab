@@ -565,6 +565,15 @@ p{margin:0}
 .cta-inner{display:grid;gap:18px;justify-items:start;max-width:760px}
 .site-nav a[aria-current="page"]{color:var(--or)}
 .page-sub main > .section:first-child{padding-top:clamp(40px,6vw,72px)}
+
+/* Apparitions au défilement */
+html.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease var(--d,0ms),transform .8s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+html.js .reveal.is-in{opacity:1;transform:none}
+.tile a{transition:border-color .25s ease,transform .35s cubic-bezier(.2,.7,.2,1)}
+.tile a:hover{transform:translateY(-4px)}
+.btn{transition:background-color .15s,border-color .15s,color .15s,transform .2s ease}
+.btn:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none}.tile a:hover{transform:none}}
 </style>
 </head>
 <body class="page-sub">
@@ -1158,6 +1167,18 @@ p{margin:0}
   document.querySelectorAll('[data-nutri-cta]').forEach(function (a) {
     a.addEventListener('click', function () { prefill('', '', 'Je veux un plan nutrition calculé pour mon objectif.'); });
   });
+
+
+  /* Apparitions au défilement : chaque bloc arrive en douceur, les tuiles l’une après l’autre. */
+  if ('IntersectionObserver' in window && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    var aRevoir = [];
+    document.querySelectorAll('main .section > .wrap > *, main .seances > .wrap > *, main .manifesto .wrap > *').forEach(function (el) { aRevoir.push(el); });
+    document.querySelectorAll('.tiles .tile').forEach(function (el, i) { el.style.setProperty('--d', (i * 90) + 'ms'); aRevoir.push(el); });
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    aRevoir.forEach(function (el) { if (el.classList.contains('tiles')) return; el.classList.add('reveal'); ro.observe(el); });
+  }
 
   /* Formulaire de demande */
   var form = document.getElementById('demande');
