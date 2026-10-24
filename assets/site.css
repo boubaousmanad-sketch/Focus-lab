@@ -897,3 +897,5 @@ html.js .reveal{opacity:1;transform:none}
   .prog-media-fight .fp-1{font-size:clamp(2.5rem,21cqi,5.5rem)}
   .prog-media-fight .fp-2{font-size:clamp(2.3rem,19.5cqi,5.1rem)}
 }
+/* Une carte ouverte par un lien (#fight-process) arrive sous l’en-tête, pas derrière */
+main article[id]{scroll-margin-top:calc(var(--hh) + 16px)}
