@@ -1,0 +1,59 @@
+Guide de style Focus & Performance
+Version du 24 octobre 2026
+
+Référence visuelle : https://focusandperformance.com
+But : l'app FOCUS LAB a le même look que ce site. Tous les styles du site sont dans
+https://focusandperformance.com/assets/site.css : reprends ses valeurs.
+Ne change rien au fonctionnement de l'app : connexion, comptes, données, séances et suivi restent identiques. Seul l'habillage change.
+
+
+COULEURS
+- Fond : #000000 (cartes : #121110, #1A1917)
+- Texte principal (craie) : #EDEAE3
+- Texte secondaire : #CDC9BF
+- Texte discret : #9C978E
+- Or (accent, boutons) : #C9A24D, au survol #DCB75F
+- Traits et bordures : #2B2925, plus marqués #3D3A35
+- Erreur : #E8A598
+- Accents des programmes : VERSUS, PERFORMANCE et FIGHT PROCESS #E5322D, BUILD #E7A928
+
+
+TYPOGRAPHIE
+- Une seule police : Archivo (https://focusandperformance.com/fonts/archivo-latin.woff2, licence libre OFL). Largeur variable de 62 % à 125 %.
+- Grands titres : graisse 800 à 850, condensés (font-stretch: 75%), interlignage serré (0,9), légèrement resserrés (letter-spacing: -0.01em).
+- Slogan : « Focus on. » condensé (62 %), « Limits off. » très large (125 %).
+- Texte courant : 17 px, interlignage 1,55, couleur craie.
+- Petit titre au-dessus d'un grand titre : or, majuscules, 13 px, espacement 0,16em, précédé d'un trait or de 28 px.
+- Typographie française : espace insécable avant « : ; ! ? » et à l'intérieur des « guillemets ».
+
+
+ÉLÉMENTS
+- En-tête : logo FP à gauche, liens à droite, bouton or « Parler de mon objectif ». Transparent sur la photo, puis noir à 90 % avec flou dès qu'on défile. Sur téléphone : bouton « Menu » qui ouvre un menu plein écran noir, liens en très gros titres condensés numérotés 01, 02, 03 en or.
+- Bouton principal : fond or, texte noir gras, hauteur 54 px, coins arrondis 6 px, petite flèche → qui avance de 4 px au survol.
+- Bouton secondaire : fond transparent, contour fin rgba(237,234,227,.28), texte craie.
+- Cartes : fond noir ou #121110, bordure #2B2925, coins arrondis 12 px. Au survol : bordure or, photo qui zoome légèrement (1,05).
+- Photos : grandes, sombres, avec un dégradé noir pour que le texte reste lisible.
+- Pied de page : « Focus on. Limits off. » en très grand (« Limits off. » en or), puis colonnes Explorer, Espaces, Contact.
+
+
+MOUVEMENT
+- Les blocs apparaissent en montant de 30 px en douceur (environ 1 s, courbe cubic-bezier(.16,1,.3,1)), en cascade de 90 ms.
+- Les photos se posent avec un léger zoom arrière.
+- Tout mouvement est coupé si l'utilisateur a activé « réduire les animations » (prefers-reduced-motion: reduce).
+
+
+LIENS VERS LE SITE
+- Accueil : https://focusandperformance.com/
+- Programmes : https://focusandperformance.com/programmes.html
+- FIGHT PROCESS : https://focusandperformance.com/programmes.html#fight-process
+- Méthode : https://focusandperformance.com/methode.html
+- Nutrition : https://focusandperformance.com/nutrition.html
+- Le coach : https://focusandperformance.com/le-coach.html
+- Contact : https://focusandperformance.com/contact.html
+- Outil nutrition du coach : https://focusandperformance.com/espace-coach/ (réservé au coach)
+- Logo FP : https://focusandperformance.com/images/logo-fp.png
+
+
+TON
+Tutoiement, phrases courtes et directes, aucun chiffre inventé (pas d'années d'expérience, pas de faux avis).
+Valeurs : Discipline · Progression · Résultats. Slogans : « Focus on. Limits off. » et « Plus loin. Ensemble. »

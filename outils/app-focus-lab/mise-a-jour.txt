@@ -1,0 +1,55 @@
+FOCUS LAB : mise à jour de l'app
+Version du 24 octobre 2026
+
+À appliquer à l'app FOCUS ON / FOCUS LAB de Focus & Performance (ChatGPT Sites).
+Ne supprime rien et ne touche pas aux comptes ni aux données : ajoute ou ajuste seulement ce qui suit.
+Si un point existe déjà, laisse-le tel quel.
+
+
+1. Compte coach
+Quand je me connecte avec mon adresse e-mail de coach, j'arrive directement dans l'espace coach, avec tous les accès, sans devoir choisir un client.
+
+
+2. Menu « Nutrition » (coach uniquement)
+- Ajoute « Nutrition » dans le menu de l'espace coach.
+- Cette page affiche l'outil nutrition en plein écran : https://focusandperformance.com/espace-coach/
+  (iframe sur toute la hauteur, sans bordure).
+- Ajoute au-dessus un lien « Ouvrir dans un nouvel onglet » vers la même adresse.
+  Si l'iframe est bloquée, garde seulement ce lien, sous forme de bouton.
+- L'outil demande le mot de passe du coach à la première ouverture : ne le mets jamais dans le code de l'app.
+- Les clients ne voient jamais ce menu.
+
+
+3. Plan nutrition de chaque client
+- Dans la fiche client, ajoute un champ « Lien du plan nutrition » où je colle le lien créé par l'outil nutrition
+  (il commence par https://focusandperformance.com/mon-plan.html).
+- Le client voit alors un bouton « Mon plan nutrition » qui ouvre ce lien. Sans lien, il ne voit rien.
+- Chaque client ne voit que ce que je lui ai attribué.
+
+
+4. Bouton « Déconnexion »
+Visible en haut de l'app (et dans le menu sur téléphone), pour le coach et pour les clients.
+Il ferme la session et ramène à la page de connexion.
+
+
+5. Programmes
+Partout où l'app présente les programmes, ils sont au nombre de quatre :
+- VERSUS : perte de poids, « Toi contre toi-même. », couleur #E5322D
+- BUILD : prise de masse, « Ne rêve pas ton physique. Construis-le. », couleur #E7A928
+- PERFORMANCE : conditionnement, « Plus endurant. Plus fort. Plus complet. », couleur #E5322D
+- FIGHT PROCESS : sports de combat (boxe, kick-boxing, MMA), « Forged to dominate. », couleur #E5322D
+  Phrase de présentation : « Avant le combat, la préparation. Pendant, son effet. »
+
+
+6. Style
+Même style que https://focusandperformance.com :
+fond noir #000000, cartes #121110, texte #EDEAE3, boutons principaux or #C9A24D, bordures #2B2925, police Archivo.
+Guide complet : https://focusandperformance.com/outils/app-focus-lab/guide-style.txt
+Feuille de style du site : https://focusandperformance.com/assets/site.css
+
+
+7. Textes
+Tutoiement, phrases courtes. Aucun chiffre inventé : pas d'années d'expérience, pas de faux avis.
+
+
+Quand c'est fait, montre-moi l'espace coach avec le menu Nutrition ouvert.

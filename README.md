@@ -27,10 +27,14 @@ Avec GitHub Pages (Settings, Pages, « Deploy from a branch », branche `main`, 
 ## Version haut de gamme (octobre 2026)
 
 - Styles et script communs : `assets/site.css` et `assets/site.js` (mis en cache d’une page à l’autre).
-- Accueil : ouverture plein écran, défilé de mots, cartes VERSUS / BUILD / PERFORMANCE, tuiles, bandeau photo, pied de page complet.
+- Accueil : ouverture plein écran, défilé de mots, cartes VERSUS / BUILD / PERFORMANCE / FIGHT PROCESS, tuiles, bandeau photo, pied de page complet.
 - Pages intérieures : ouverture photo avec grand titre, page suivante en bas.
 - En-tête transparent sur la photo, menu plein écran sur téléphone, transitions entre les pages.
 - `outils/construire-site-premium.py` : script qui a produit cette version à partir de l’ancienne.
 - Accueil : les photos d’ouverture se relaient en fondu (chargées après la page, arrêtées si « réduire les animations »).
 - Nutrition : anneau protéines / glucides / lipides au lieu d’une photo, bloc « Ton plan, partout ».
 - Partage et Google : titres et descriptions par page, fil d’Ariane et FAQ en données structurées, page 404 « Hors piste ».
+
+## App FOCUS LAB : instructions de mise à jour
+
+L’app FOCUS LAB reste sur ChatGPT Sites, qui ne se met pas à jour depuis GitHub. Le dossier `outils/app-focus-lab/` garde la dernière version des instructions à donner à ChatGPT (`mise-a-jour.txt`) et le guide de style (`guide-style.txt`). Mode d’emploi : `outils/app-focus-lab/LISEZMOI.md`.
