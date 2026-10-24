@@ -899,3 +899,8 @@ html.js .reveal{opacity:1;transform:none}
 }
 /* Une carte ouverte par un lien (#fight-process) arrive sous l’en-tête, pas derrière */
 main article[id]{scroll-margin-top:calc(var(--hh) + 16px)}
+/* FIGHT PROCESS : photo en fond, passée en rouge et noir, le titre reste lisible */
+.prog-media-fight,.plan-cover-fight{isolation:isolate}
+.fp-photo{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#c22b25}
+.fp-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(1) contrast(1.2) brightness(1.05);mix-blend-mode:multiply}
+.prog-media-fight::before,.plan-cover-fight::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(22deg,rgba(0,0,0,.92) 10%,rgba(0,0,0,.55) 42%,rgba(0,0,0,.04) 86%)}
