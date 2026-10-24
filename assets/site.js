@@ -238,8 +238,14 @@
         text: 'BUILD, c’est construire ton physique : plus de masse, plus de force et une progression mesurable, bloc après bloc.' },
       condition: { name: 'PERFORMANCE', goal: 'Conditionnement', profil: 'Conditionnement (PERFORMANCE)', objectif: 'améliorer ma condition',
         text: 'PERFORMANCE te rend plus endurant, plus fort et plus complet : conditionnement et capacité athlétique, pour le ring, le terrain ou HYROX.' },
-      echeance: { name: 'Préparation d’objectif', goal: 'Combat, saison, tests', profil: 'Autre', objectif: 'préparer une échéance',
-        text: 'Tout le travail est planifié à rebours de ta date : tests de départ, points d’étape et affûtage pour être prêt le jour J.' }
+      echeance: { name: 'Préparation d’objectif', goal: 'Saison, tests, échéance', profil: 'Autre', objectif: 'préparer une échéance',
+        text: 'Tout le travail est planifié à rebours de ta date : tests de départ, points d’étape et affûtage pour être prêt le jour J.' },
+      fight: { name: 'FIGHT PROCESS', dm: 'FIGHT', goal: 'Sports de combat', profil: 'Sports de combat', objectif: 'préparer un combat',
+        text: 'FIGHT PROCESS, c’est ta préparation de combat : avant le combat, la préparation ; pendant, son effet. Tout est planifié à rebours jusqu’au jour du combat. Forged to dominate.' }
+    };
+    var choixProgramme = function () {
+      if (answers.contexte === 'combat' && (answers.objectif === 'echeance' || answers.objectif === 'condition')) return PROGRAMMES.fight;
+      return PROGRAMMES[answers.objectif] || PROGRAMMES.muscle;
     };
     var LABELS = {
       contexte: { combat: 'sports de combat', football: 'football', intervention: 'police, armée', course: 'course à pied', salle: 'salle ou fitness', aucun: 'sans sport en particulier' },
@@ -281,10 +287,10 @@
       }
     };
     var showResult = function () {
-      var p = PROGRAMMES[answers.objectif] || PROGRAMMES.muscle;
+      var p = choixProgramme();
       quiz.querySelector('[data-r-name]').textContent = p.name;
       var dmLabel = quiz.querySelector('[data-r-dm]');
-      if (dmLabel) dmLabel.textContent = p.name === 'Préparation d’objectif' ? 'Ou écris-moi en DM sur Instagram' : 'Ou écris «\u00a0' + p.name + '\u00a0» en DM sur Instagram';
+      if (dmLabel) dmLabel.textContent = p.name === 'Préparation d’objectif' ? 'Ou écris-moi en DM sur Instagram' : 'Ou écris «\u00a0' + (p.dm || p.name) + '\u00a0» en DM sur Instagram';
       quiz.querySelector('[data-r-goal]').textContent = p.goal;
       quiz.querySelector('[data-r-profile]').textContent = 'Ton profil : ' + summary() + '.';
       quiz.querySelector('[data-r-text]').textContent = p.text + ' ' + (NIVEAU_TEXT[answers.niveau] || '');
@@ -314,7 +320,7 @@
       showStep(0, true);
     });
     quiz.querySelector('[data-r-send]').addEventListener('click', function () {
-      var p = PROGRAMMES[answers.objectif] || PROGRAMMES.muscle;
+      var p = choixProgramme();
       prefill(PROFIL_CONTEXTE[answers.contexte] || p.profil, p.name,
         'D’après « Trouve ton programme » : ' + p.objectif + ' (' + summary() + ').');
     });

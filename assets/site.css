@@ -862,3 +862,38 @@ html.js .reveal{opacity:1;transform:none}
 
 /* Le zoom des photos reste dans leur cadre : pas de bord visible hors du dégradé */
 .hero-media,.ph-media,.cta-bg{overflow:hidden}
+
+/* FIGHT PROCESS : carte vedette des sports de combat */
+.plan[data-accent="fight"],.prog-card[data-accent="fight"]{--accent:#e5322d}
+.plan-cover-fight,.prog-media-fight{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:.04em;background:radial-gradient(90% 80% at 85% 12%,rgba(229,50,45,.32),rgba(0,0,0,0) 60%),linear-gradient(160deg,#170808,#000 72%)}
+.plan-cover-fight{padding:var(--plan-pad)}
+.prog-media-fight{padding:20px}
+.fp-w{font-weight:850;line-height:.86;letter-spacing:-.015em;white-space:nowrap}
+.fp-1{font-stretch:125%;color:var(--craie)}
+.fp-2{font-stretch:62%;color:transparent;-webkit-text-stroke:1.5px var(--craie)}
+.plan-cover-fight .fp-1{font-size:clamp(3.25rem,10vw,6.25rem)}
+.plan-cover-fight .fp-2{font-size:clamp(3rem,9vw,5.75rem)}
+.prog-media-fight .fp-1{font-size:clamp(2.75rem,7vw,3.5rem)}
+.prog-media-fight .fp-2{font-size:clamp(2.5rem,6.4vw,3.25rem)}
+.fp-slogan{margin-top:.9em;color:#e5322d;font-size:clamp(.875rem,1.6vw,1rem);font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.plan-process{color:var(--craie-2);font-style:italic}
+@supports not (-webkit-text-stroke:1px #000){.fp-2{color:var(--craie)}}
+.plan-feature{grid-column:1/-1}
+@media (min-width:900px){
+  .plan-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(28px,4vw,56px);row-gap:16px;align-content:start}
+  .plan-feature .plan-cover{grid-column:1;grid-row:1 / span 5;margin:calc(var(--plan-pad) * -1) 0 calc(var(--plan-pad) * -1) calc(var(--plan-pad) * -1);aspect-ratio:auto;min-height:420px}
+  .plan-feature>:not(.plan-cover){grid-column:2}
+  .plan-feature .plan-cover::after{left:auto;top:0;width:3px;height:auto}
+}
+@media (min-width:960px) and (max-width:1279px){.prog-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1280px){.prog-cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Cartes programmes : la photo garde son format, le texte reste dans la carte */
+.prog-card{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;align-content:start}
+.prog-body{min-width:0}
+@media (min-width:1280px){.prog-cards .prog-name{font-size:clamp(1.75rem,2.2vw,2.25rem)}}
+/* Le titre FIGHT PROCESS de la carte d’accueil suit la largeur de la carte */
+@supports (container-type:inline-size){
+  .prog-media-fight{container-type:inline-size}
+  .prog-media-fight .fp-1{font-size:clamp(2.5rem,21cqi,5.5rem)}
+  .prog-media-fight .fp-2{font-size:clamp(2.3rem,19.5cqi,5.1rem)}
+}
