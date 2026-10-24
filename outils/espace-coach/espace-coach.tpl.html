@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Espace coach · FOCUS LAB</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/images/favicon-fp.png">
+<style>
+:root{--noir:#000;--fonte:#121110;--trait:#3d3a35;--craie:#edeae3;--acier:#9c978e;--or:#c9a24d;--or-vif:#dcb75f;--erreur:#e8a598;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--noir);color:var(--craie);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5}
+main{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px 16px}
+.carte{width:100%;max-width:400px;padding:32px 24px;border:1px solid var(--trait);border-radius:14px;background:var(--fonte)}
+.logo{display:block;width:64px;height:64px;margin:0 auto 18px}
+h1{margin:0 0 6px;font-size:1.6rem;text-align:center;letter-spacing:-.01em}
+p{margin:0 0 22px;color:var(--acier);text-align:center;font-size:.95rem}
+label{display:block;margin-bottom:8px;font-weight:600;font-size:.95rem}
+input[type=password],input[type=text]{width:100%;min-height:52px;padding:12px 14px;border:1px solid var(--trait);border-radius:8px;background:var(--noir);color:var(--craie);font:inherit}
+input:focus{outline:none;border-color:var(--or);box-shadow:0 0 0 3px rgba(201,162,77,.32)}
+.garde{display:flex;gap:10px;align-items:center;margin:14px 0 20px;font-weight:400;color:var(--craie)}
+.garde input{width:20px;height:20px;accent-color:var(--or)}
+button{width:100%;min-height:52px;border:0;border-radius:8px;background:var(--or);color:#000;font:inherit;font-weight:700;cursor:pointer}
+button:hover{background:var(--or-vif)}
+button[disabled]{opacity:.6;cursor:wait}
+.err{min-height:1.4em;margin:12px 0 0;color:var(--erreur);text-align:center;font-size:.95rem}
+.retour{display:block;margin-top:22px;color:var(--acier);text-align:center;font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+  <form class="carte" id="f" autocomplete="on">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.75" fill="#000" stroke="#C9A24D" stroke-width="1"/><text x="20" y="25.4" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#EDEAE3">F<tspan fill="#C9A24D">P</tspan></text></svg>
+    <h1>Espace coach</h1>
+    <p>Outil nutrition FOCUS LAB, réservé au coach.</p>
+    <input type="text" name="username" value="coach" autocomplete="username" hidden>
+    <label for="pw">Mot de passe</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <label class="garde"><input type="checkbox" id="garde" checked> Rester connecté sur cet appareil</label>
+    <button id="ok" type="submit">Ouvrir</button>
+    <p class="err" id="err" role="alert"></p>
+    <a class="retour" href="/">Retour au site</a>
+  </form>
+</main>
+<script>
+(function () {
+  /* L’outil est chiffré (AES-256-GCM, clé tirée du mot de passe par PBKDF2) : sans le mot de passe, son contenu est illisible. */
+  var SEL = '__SEL__', IV = '__IV__', ITER = __ITER__, DATA = '__DATA__', CLE = 'fl-espace-coach-cle';
+  var b = function (s) { var r = atob(s), u = new Uint8Array(r.length); for (var i = 0; i < r.length; i++) u[i] = r.charCodeAt(i); return u; };
+  var sub = window.crypto && window.crypto.subtle;
+  function ouvre(cle) {
+    return sub.decrypt({ name: 'AES-GCM', iv: b(IV) }, cle, b(DATA)).then(function (buf) {
+      var html = new TextDecoder().decode(buf);
+      document.open(); document.write(html); document.close();
+    });
+  }
+  function depuisMdp(pw) {
+    return sub.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']).then(function (base) {
+      return sub.deriveKey({ name: 'PBKDF2', salt: b(SEL), iterations: ITER, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, true, ['decrypt']);
+    });
+  }
+  var err = document.getElementById('err'), btn = document.getElementById('ok');
+  if (!sub) { err.textContent = 'Ouvre cette page en https dans un navigateur récent.'; btn.disabled = true; return; }
+  /* Lien d’accès direct du coach : la clé arrive après le #, n’est jamais envoyée au serveur,
+     est gardée sur l’appareil puis retirée de l’adresse. */
+  var lien = /[#&]k=([A-Za-z0-9_-]{40,})/.exec(location.hash);
+  if (lien) {
+    btn.textContent = 'Ouverture…';
+    var parLien = function () {
+      sub.importKey('raw', b(lien[1].replace(/-/g, '+').replace(/_/g, '/')), { name: 'AES-GCM' }, true, ['decrypt']).then(function (cle) {
+        return sub.decrypt({ name: 'AES-GCM', iv: b(IV) }, cle, b(DATA)).then(function () {
+          return sub.exportKey('jwk', cle).then(function (k) { try { localStorage.setItem(CLE, JSON.stringify(k)); } catch (x) {} });
+        }).then(function () {
+          try { history.replaceState(null, '', location.pathname); } catch (x) {}
+          return ouvre(cle);
+        });
+      }).catch(function () {
+        btn.textContent = 'Ouvrir';
+        err.textContent = 'Ce lien d’accès n’est plus valable. Entre ton mot de passe.';
+      });
+    };
+    if (document.readyState === 'complete') parLien(); else window.addEventListener('load', function () { setTimeout(parLien, 0); });
+  } else try {
+    var j = localStorage.getItem(CLE);
+    if (j) {
+      document.getElementById('ok').textContent = 'Ouverture…';
+      var auto = function () { sub.importKey('jwk', JSON.parse(j), { name: 'AES-GCM' }, false, ['decrypt']).then(ouvre).catch(function () { try { localStorage.removeItem(CLE); } catch (e) {} document.getElementById('ok').textContent = 'Ouvrir'; }); };
+      if (document.readyState === 'complete') auto(); else window.addEventListener('load', function () { setTimeout(auto, 0); });
+    }
+  } catch (e) {}
+  document.getElementById('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var pw = document.getElementById('pw').value;
+    if (!pw) return;
+    btn.disabled = true; btn.textContent = 'Ouverture…'; err.textContent = '';
+    depuisMdp(pw).then(function (cle) {
+      return sub.decrypt({ name: 'AES-GCM', iv: b(IV) }, cle, b(DATA)).then(function () {
+        var garder = document.getElementById('garde').checked;
+        var suite = garder ? sub.exportKey('jwk', cle).then(function (k) { try { localStorage.setItem(CLE, JSON.stringify(k)); } catch (x) {} }) : Promise.resolve();
+        return suite.then(function () { return ouvre(cle); });
+      });
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = 'Ouvrir';
+      err.textContent = 'Mot de passe incorrect.';
+    });
+  });
+})();
+</script>
+</body>
+</html>
