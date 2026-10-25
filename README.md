@@ -38,3 +38,7 @@ Avec GitHub Pages (Settings, Pages, « Deploy from a branch », branche `main`, 
 ## App FOCUS LAB : instructions de mise à jour
 
 L’app FOCUS LAB reste sur ChatGPT Sites, qui ne se met pas à jour depuis GitHub. Le dossier `outils/app-focus-lab/` garde la dernière version des instructions à donner à ChatGPT (`mise-a-jour.txt`) et le guide de style (`guide-style.txt`). Mode d’emploi : `outils/app-focus-lab/LISEZMOI.md`.
+
+## Invités du calculateur nutrition
+
+Un invité peut avoir accès au seul outil nutrition, sur une page à lui (`invite-<prénom>/`), sans jamais recevoir le mot de passe du coach. Ajouter, changer un mot de passe ou retirer un accès : `outils/invites/LISEZMOI.md`.
