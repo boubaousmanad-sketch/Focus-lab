@@ -22,7 +22,7 @@ L'objet `CONFIG`, en bas de `coach.html`, contient l'e-mail de contact et le com
 
 Publie `coach.html` avec les dossiers `images/` et `fonts/` à la racine du site.
 
-Avec GitHub Pages (Settings, Pages, « Deploy from a branch », branche `main`, dossier racine), la vitrine est publiée à https://boubaousmanad-sketch.github.io/Focus-lab/coach.html et se met à jour à chaque modification de la branche `main`. `404.html` renvoie les adresses inconnues, et la racine du site, vers la vitrine. L’app FOCUS LAB, le fil du coach et la confidentialité restent sur ChatGPT Sites : les liens de `coach.html` pointent vers ces pages.
+Avec GitHub Pages (Settings, Pages, « Deploy from a branch », dossier racine), le site est publié sur https://focusandperformance.com. **La branche publiée est actuellement `feat/focus-lab-mobile`, pas `main`** : une modification n’est en ligne qu’une fois poussée sur `feat/focus-lab-mobile` (garder `main` au même point). `404.html` renvoie les adresses inconnues, et la racine du site, vers la vitrine. L’app FOCUS LAB, le fil du coach et la confidentialité restent sur ChatGPT Sites : les liens de `coach.html` pointent vers ces pages.
 
 ## Version haut de gamme (octobre 2026)
 
