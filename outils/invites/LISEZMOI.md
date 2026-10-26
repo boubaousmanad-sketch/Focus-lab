@@ -23,3 +23,4 @@ Supprimer le dossier `invite-<prénom>/`. Son lien et son mot de passe ne serven
 ## Invités actuels
 
 - Kenny : `invite-kenny/`
+- Abdelaziz : `invite-abdelaziz/`

@@ -76,8 +76,9 @@ const key = await c.subtle.deriveKey({ name: 'PBKDF2', salt: sel, iterations: it
 const ct = new Uint8Array(await c.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(outil)));
 const raw = b64url(new Uint8Array(await c.subtle.exportKey('raw', key)));
 const nom = prenom.charAt(0).toUpperCase() + prenom.slice(1);
+const deNom = (/^[aeiouyàâäéèêëîïôöùûü]/i.test(nom) ? 'd’' : 'de ') + nom;
 const page = readFileSync(ici + 'invite.tpl.html', 'utf8')
-  .replace('__PRENOM__', nom).replace('__CLE__', cle)
+  .replace('__DE_PRENOM__', deNom).replace('__CLE__', cle)
   .replace('__SEL__', b64(sel)).replace('__IV__', b64(iv)).replace('__ITER__', String(iter)).replace('__DATA__', b64(ct));
 mkdirSync(dossier, { recursive: true });
 writeFileSync(sortie, page);
